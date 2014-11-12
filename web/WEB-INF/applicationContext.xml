@@ -70,15 +70,7 @@
          <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
-    <bean id="userDaoImpl" class="dao.LendsDAOImpl">
-         <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-    
-    <bean id="userDaoImpl" class="dao.LendsDAOImpl">
-         <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-    
-    <bean id="userDaoImpl" class="dao.LendsDAOImpl">
+    <bean id="userDaoImpl" class="dao.UsersDAOImpl">
          <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
