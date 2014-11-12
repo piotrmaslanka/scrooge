@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 12, 2014 12:25:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="scrooge.models.AssetNotes" table="asset_notes" schema="public" optimistic-lock="version">
+        <comment>Informacje do administratora o stanie przedmiotu</comment>
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="assets" class="scrooge.models.Assets" fetch="select">
+            <column name="id_asset" length="30">
+                <comment>ID &#156;rodka</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="users" class="scrooge.models.Users" fetch="select">
+            <column name="who_reported" length="256">
+                <comment>Kto zg&#179;osi&#179;</comment>
+            </column>
+        </many-to-one>
+        <property name="whenCreated" type="timestamp">
+            <column name="when_created" length="29">
+                <comment>Kiedy z&#179;o&#191;ono informacj&#234;</comment>
+            </column>
+        </property>
+        <property name="isDamaged" type="boolean">
+            <column name="is_damaged" not-null="true">
+                <comment>Czy &#156;rodek zosta&#179; uszkodzony?</comment>
+            </column>
+        </property>
+        <property name="isLost" type="boolean">
+            <column name="is_lost" not-null="true">
+                <comment>Czy &#156;rodek zosta&#179; zagubiony?</comment>
+            </column>
+        </property>
+        <property name="reason" type="string">
+            <column name="reason">
+                <comment>Pow&#243;d zg&#179;oszenia</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

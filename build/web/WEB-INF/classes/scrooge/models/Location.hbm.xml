@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 12, 2014 12:25:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="scrooge.models.Location" table="location" schema="public" optimistic-lock="version">
+        <comment>Sale</comment>
+        <id name="id" type="string">
+            <column name="id" length="10" />
+            <generator class="assigned" />
+        </id>
+        <set name="reports" table="report" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="location" length="10" not-null="true">
+                    <comment>Pe&#179;na nazwa sali</comment>
+                </column>
+            </key>
+            <one-to-many class="scrooge.models.Report" />
+        </set>
+        <set name="assetses" table="assets" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="location" length="10">
+                    <comment>Pe&#179;na nazwa sali (po&#179;o&#191;enie &#156;rodka)</comment>
+                </column>
+            </key>
+            <one-to-many class="scrooge.models.Assets" />
+        </set>
+    </class>
+</hibernate-mapping>

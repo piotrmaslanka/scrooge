@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 12, 2014 12:25:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="scrooge.models.Report" table="report" schema="public" optimistic-lock="version">
+        <comment>Raport z ewidencji pojedynczej sali</comment>
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="location" class="scrooge.models.Location" fetch="select">
+            <column name="location" length="10" not-null="true">
+                <comment>Pe&#179;na nazwa sali</comment>
+            </column>
+        </many-to-one>
+        <property name="whenDone" type="timestamp">
+            <column name="when_done" length="29" not-null="true">
+                <comment>Kiedy zamkni&#234;to raport</comment>
+            </column>
+        </property>
+        <property name="extraInfo" type="string">
+            <column name="extra_info">
+                <comment>Informacje dodatkowe</comment>
+            </column>
+        </property>
+        <set name="reportItems" table="report_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_report" not-null="true">
+                    <comment>ID powi&#185;zanego raportu</comment>
+                </column>
+            </key>
+            <one-to-many class="scrooge.models.ReportItem" />
+        </set>
+    </class>
+</hibernate-mapping>
