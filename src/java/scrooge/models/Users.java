@@ -21,25 +21,28 @@ public class Users  implements java.io.Serializable {
      private Set<Lends> lendses = new HashSet<Lends>(0);
      private Set<Assets> assetses = new HashSet<Assets>(0);
      private Set<AssetNotes> assetNoteses = new HashSet<AssetNotes>(0);
+     private boolean isAdmin;
 
     public Users() {
     }
 
 	
-    public Users(String login, String name, String pesel, Date birthdate, String password) {
+    public Users(String login, String name, String pesel, Date birthdate, String password, boolean isAdmin) {
         this.login = login;
         this.name = name;
         this.pesel = pesel;
         this.birthdate = birthdate;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
-    public Users(String login, String name, String surname, String pesel, Date birthdate, String password, Set<Lends> lendses, Set<Assets> assetses, Set<AssetNotes> assetNoteses) {
+    public Users(String login, String name, String surname, String pesel, Date birthdate, String password, boolean isAdmin, Set<Lends> lendses, Set<Assets> assetses, Set<AssetNotes> assetNoteses) {
        this.login = login;
        this.name = name;
        this.surname = surname;
        this.pesel = pesel;
        this.birthdate = birthdate;
        this.password = password;
+       this.isAdmin = isAdmin;
        this.lendses = lendses;
        this.assetses = assetses;
        this.assetNoteses = assetNoteses;
@@ -82,6 +85,13 @@ public class Users  implements java.io.Serializable {
     }
     public String getPassword() {
         return this.password;
+    }
+    
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    public boolean getIsAdmin() {
+        return this.isAdmin;
     }
     
     public void setPassword(String password) {
