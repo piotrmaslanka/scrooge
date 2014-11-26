@@ -39,10 +39,9 @@ public class UserMB implements Serializable{
     
     @ManagedProperty(value = "#{usersServiceImpl}" )
     private UsersService usersService;
-   
-    
-    @Autowired
-    private LoginState loginState;
+       
+    @ManagedProperty(value="#loginState")
+    private LoginState loginState;   
    
     /**
      * @return the user

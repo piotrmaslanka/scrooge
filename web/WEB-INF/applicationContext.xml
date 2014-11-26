@@ -103,18 +103,9 @@
         <property name = "usersDAO" ref = "userDaoImpl"/>
     </bean>
       
-    <bean id = "LoginState" class = "components.LoginState">
+    <bean id = "loginState" class = "components.LoginState">
         <property name = "usersService" ref = "usersServiceImpl"/>
     </bean>    
-    
-    <bean id="usersMB" class="beans.UserMB">
-        <property name="loginState" ref="LoginState"/>
-    </bean>
-
-    <bean id="loginMB" class="beans.LoginMB">
-        <property name="loginState" ref="LoginState"/>
-    </bean>
-
 </beans>
 
 

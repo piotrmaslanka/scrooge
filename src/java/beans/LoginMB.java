@@ -3,8 +3,8 @@ package beans;
 import components.LoginState;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Bean doing login/logout stuff
@@ -22,7 +22,7 @@ public class LoginMB implements Serializable {
     public void setPassword(String password) { this.password = password; }
     public String getPassword() { return this.password; }
 
-    @Autowired
+    @ManagedProperty(value="#loginState")
     private LoginState loginState;   
 
     public void setLoginState(LoginState loginState) { this.loginState = loginState; }
