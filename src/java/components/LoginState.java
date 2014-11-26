@@ -1,8 +1,8 @@
 package components;
 import java.io.Serializable;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import models.Users;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import service.UsersService;
 /**
@@ -20,7 +20,6 @@ public class LoginState implements Serializable {
     
     @Autowired
     private UsersService usersService;    
-
    
     public boolean isAdmin() { 
         if (this.user == null) return false;    // certainly not admin :)

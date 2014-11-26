@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  * Bean doing login/logout stuff
@@ -28,4 +29,18 @@ public class LoginMB implements Serializable {
     public void setLoginState(LoginState loginState) { this.loginState = loginState; }
     
     
+    public void login() {
+        if (this.loginState.authenticate(this.login, this.password)) {
+            // logged in
+        } else {
+            // failed to login
+        }
+    }
+    
+    public void logout() {
+        this.loginState.logout();  
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+        } catch (IOException e) {}
+    }
 }
