@@ -7,14 +7,17 @@ package service;
 
 import dao.ReportItemDAO;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import scrooge.models.ReportItem;
 
 /**
  *
  * @author Muman
  */
+@Transactional
 public class ReportItemServiceImpl implements ReportItemService{
-
+    @Autowired
     private ReportItemDAO reportItemDAO;
     
     @Override

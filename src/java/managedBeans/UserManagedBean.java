@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import scrooge.models.Users;
 import service.UsersService;
 
@@ -17,7 +18,7 @@ import service.UsersService;
  * @author Muman
  */
 @ManagedBean(name = "usersMB")
-@RequestScoped
+@SessionScoped
 public class UserManagedBean implements Serializable{
 
     /**

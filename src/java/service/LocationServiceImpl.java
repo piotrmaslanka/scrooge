@@ -7,14 +7,17 @@ package service;
 
 import dao.LocationDAO;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import scrooge.models.Location;
 
 /**
  *
  * @author Muman
  */
+@Transactional
 public class LocationServiceImpl implements LocationService{
-
+    @Autowired
     private LocationDAO locationDAO;
     
     @Override

@@ -7,14 +7,17 @@ package service;
 
 import dao.LendsDAO;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import scrooge.models.Lends;
 
 /**
  *
  * @author Muman
  */
+@Transactional
 public class LendsServiceImpl implements LendsService{
-
+    @Autowired
     private LendsDAO lendsDAO;
     
     @Override

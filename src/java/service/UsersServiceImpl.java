@@ -7,16 +7,21 @@ package service;
 
 import dao.UsersDAO;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import scrooge.models.Users;
 
 /**
  *
  * @author Muman
  */
+@Transactional
 public class UsersServiceImpl implements UsersService{
 
+    @Autowired
     private UsersDAO usersDAO;
     
+
     @Override
     public void addUser(Users user) {
         getUsersDAO().addUser(user);
@@ -53,6 +58,7 @@ public class UsersServiceImpl implements UsersService{
      * @param usersDAO the usersDAO to set
      */
     public void setUsersDAO(UsersDAO usersDAO) {
+        System.out.println(usersDAO);
         this.usersDAO = usersDAO;
     }
     

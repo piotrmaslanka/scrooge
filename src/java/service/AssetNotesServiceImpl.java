@@ -7,14 +7,17 @@ package service;
 
 import dao.AssetNotesDAO;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import scrooge.models.AssetNotes;
 
 /**
  *
  * @author Muman
  */
+@Transactional
 public class AssetNotesServiceImpl implements AssetNotesService{
-
+    @Autowired
     private AssetNotesDAO assetNotesDAO;
     
     @Override

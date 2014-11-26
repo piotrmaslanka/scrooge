@@ -21,7 +21,10 @@
                 <p:outputLabel value="Enter User password: "></p:outputLabel>
                 <p:password value="#{usersMB.user.password}" ></p:password>
                 <p:outputLabel value="Enter User pesel: "></p:outputLabel>
-                <p:inputText value="#{usersMB.user.surname}"></p:inputText>  
+                <p:inputText value="#{usersMB.user.pesel}"></p:inputText>  
+                <h:outputText value="Ajax: " />
+                <p:selectBooleanCheckbox value="#{usersMB.user.isAdmin}">
+                </p:selectBooleanCheckbox>
             </p:panelGrid>
             <p:commandButton value="Register" action="#{usersMB.register}" update="messages"></p:commandButton>
         </h:form>
