@@ -20,11 +20,11 @@ import service.UsersService;
  */
 @ManagedBean(name = "usersMB")
 @SessionScoped
-public class UserManagedBean implements Serializable{
+public class UserMB implements Serializable{
 
     private int x = 0;
     
-    public UserManagedBean() {
+    public UserMB() {
         
     }
     
@@ -75,4 +75,6 @@ public class UserManagedBean implements Serializable{
     public void setUsersService(UsersService usersService) {
         this.usersService = usersService;
     }
+    
+    public void setLoginState(LoginState loginState) { this.loginState = loginState; }
 }

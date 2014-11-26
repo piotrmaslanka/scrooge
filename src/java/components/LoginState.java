@@ -16,6 +16,7 @@ public class LoginState implements Serializable {
     
     public void setUser(Users user) { this.user = user; }
     public Users getUser() { return this.user; }
+    public void setUsersService(UsersService usersService) { this.usersService = usersService; }
     
     @ManagedProperty(value = "#{usersServiceImpl}" )
     private UsersService usersService;    
@@ -46,4 +47,13 @@ public class LoginState implements Serializable {
         }
         return false;
     }
+    
+    /**
+     * Logs user out
+     */
+    public void logout() {
+        this.user = null;
+    }
+    
+    
 }
