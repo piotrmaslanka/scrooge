@@ -51,7 +51,7 @@ public class AssetNotesDAOImpl implements AssetNotesDAO{
     }
 
     /**
-     * @param SessionFactory the SessionFactory to set
+     * @param sessionFactory the SessionFactory to set
      */
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
