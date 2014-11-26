@@ -6,7 +6,7 @@
 package service;
 
 import java.util.List;
-import scrooge.models.Users;
+import models.Users;
 
 /**
  *
@@ -20,6 +20,8 @@ public interface UsersService {
     public void updateUser(Users user);
     
     public Users getUserById(int id);
+    
+    public Users getUserByLogin(String login);
     
     public List<Users> getAllUsers();
 }

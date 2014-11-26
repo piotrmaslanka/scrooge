@@ -7,12 +7,12 @@
     <property name="hibernate.connection.url">jdbc:postgresql://test.smok-serwis.pl:5432/l4_scrooge</property>
     <property name="hibernate.connection.username">l4_common</property>
     <property name="hibernate.connection.password">fortheemperor</property>
-    <mapping resource="scrooge/models/AssetNotes.hbm.xml"/>
-    <mapping resource="scrooge/models/Lends.hbm.xml"/>
-    <mapping resource="scrooge/models/Report.hbm.xml"/>
-    <mapping resource="scrooge/models/Location.hbm.xml"/>
-    <mapping resource="scrooge/models/Assets.hbm.xml"/>
-    <mapping resource="scrooge/models/Users.hbm.xml"/>
-    <mapping resource="scrooge/models/ReportItem.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="models/AssetNotes.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="models/Lends.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="models/Report.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="models/Location.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="models/Assets.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="models/Users.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="models/ReportItem.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -9,7 +9,7 @@ import dao.ReportItemDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import scrooge.models.ReportItem;
+import models.ReportItem;
 
 /**
  *

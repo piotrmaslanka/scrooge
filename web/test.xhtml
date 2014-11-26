@@ -22,11 +22,16 @@
                 <p:password value="#{usersMB.user.password}" ></p:password>
                 <p:outputLabel value="Enter User pesel: "></p:outputLabel>
                 <p:inputText value="#{usersMB.user.pesel}"></p:inputText>  
-                <h:outputText value="Ajax: " />
+                <h:outputText value="Ajax: " />                
                 <p:selectBooleanCheckbox value="#{usersMB.user.isAdmin}">
                 </p:selectBooleanCheckbox>
             </p:panelGrid>
-            <p:commandButton value="Register" action="#{usersMB.register}" update="messages"></p:commandButton>
+            <p:commandButton value="Register" action="#{usersMB.register}" update="messages" ajax="false"></p:commandButton>
+        </h:form>
+        
+        <h:form>
+            <h:outputText value="#{usersMB.x}"></h:outputText>
+            <p:commandButton value="Increment X" action="#{usersMB.incX}" ajax="false"></p:commandButton>
         </h:form>
     </h:body>
 </html>

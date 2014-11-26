@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package managedBeans;
+package beans;
 
+import components.LoginState;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import scrooge.models.Users;
+import models.Users;
+import org.springframework.beans.factory.annotation.Autowired;
 import service.UsersService;
 
 /**
@@ -21,17 +22,27 @@ import service.UsersService;
 @SessionScoped
 public class UserManagedBean implements Serializable{
 
-    /**
-     * Creates a new instance of UserManagedBean
-     */
+    private int x = 0;
+    
     public UserManagedBean() {
         
     }
+    
+    public void incX() {
+        this.x++;
+    }
+    
+    public int getX() { return this.x; }
+    public void setX(int x) { this.x = x; }
     
     private Users user = new Users();
     
     @ManagedProperty(value = "#{usersServiceImpl}" )
     private UsersService usersService;
+   
+    
+    @Autowired
+    private LoginState loginState;
    
     /**
      * @return the user

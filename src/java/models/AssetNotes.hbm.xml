@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 12, 2014 12:25:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="models.AssetNotes" optimistic-lock="version" schema="public" table="asset_notes">
+    <comment>Informacje do administratora o stanie przedmiotu</comment>
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="models.Assets" fetch="select" name="assets">
+      <column length="30" name="id_asset">
+        <comment>ID rodka</comment>
+      </column>
+    </many-to-one>
+    <many-to-one class="models.Users" fetch="select" name="users">
+      <column length="256" name="who_reported">
+        <comment>Kto zg³osi³</comment>
+      </column>
+    </many-to-one>
+    <property name="whenCreated" type="timestamp">
+      <column length="29" name="when_created">
+        <comment>Kiedy z³o¿ono informacjê</comment>
+      </column>
+    </property>
+    <property name="isDamaged" type="boolean">
+      <column name="is_damaged" not-null="true">
+        <comment>Czy rodek zosta³ uszkodzony?</comment>
+      </column>
+    </property>
+    <property name="isLost" type="boolean">
+      <column name="is_lost" not-null="true">
+        <comment>Czy rodek zosta³ zagubiony?</comment>
+      </column>
+    </property>
+    <property name="reason" type="string">
+      <column name="reason">
+        <comment>Powód zg³oszenia</comment>
+      </column>
+    </property>
+  </class>
+</hibernate-mapping>

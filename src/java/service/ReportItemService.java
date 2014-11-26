@@ -6,8 +6,8 @@
 package service;
 
 import java.util.List;
-import scrooge.models.Report;
-import scrooge.models.ReportItem;
+import models.Report;
+import models.ReportItem;
 
 /**
  *

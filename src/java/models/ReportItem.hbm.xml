@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 12, 2014 12:25:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="models.ReportItem" optimistic-lock="version" schema="public" table="report_item">
+    <comment>Operacja ewidencji przedmiotu w ramach raportu</comment>
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="models.Assets" fetch="select" name="assets">
+      <column length="30" name="id_asset" not-null="true">
+        <comment>Nr ewidencyjny rodka</comment>
+      </column>
+    </many-to-one>
+    <many-to-one class="models.Report" fetch="select" name="report">
+      <column name="id_report" not-null="true">
+        <comment>ID powi¹zanego raportu</comment>
+      </column>
+    </many-to-one>
+    <property name="extraInfo" type="string">
+      <column name="extra_info">
+        <comment>Informacje dodatkowe</comment>
+      </column>
+    </property>
+    <property name="isDamaged" type="boolean">
+      <column name="is_damaged" not-null="true">
+        <comment>Czy rodek jest uszkodzony</comment>
+      </column>
+    </property>
+    <property name="isLost" type="boolean">
+      <column name="is_lost" not-null="true">
+        <comment>Czy rodek jest zagubiony</comment>
+      </column>
+    </property>
+  </class>
+</hibernate-mapping>

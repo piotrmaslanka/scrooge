@@ -9,7 +9,7 @@ import dao.UsersDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import scrooge.models.Users;
+import models.Users;
 
 /**
  *
@@ -42,6 +42,11 @@ public class UsersServiceImpl implements UsersService{
         return getUsersDAO().getUserById(id);
     }
 
+    @Override
+    public Users getUserByLogin(String login) {
+        return getUsersDAO().getUserByLogin(login);
+    }
+    
     @Override
     public List<Users> getAllUsers() {
         return getUsersDAO().getAllUsers();

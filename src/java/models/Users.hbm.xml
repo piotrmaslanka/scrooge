@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 12, 2014 12:25:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="models.Users" optimistic-lock="version" schema="public" table="users">
+    <comment>U¿ytkownicy/pracownicy katedry</comment>
+    <id name="login" type="string">
+      <column length="256" name="login"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="name" type="string">
+      <column length="30" name="name" not-null="true">
+        <comment>Imiê</comment>
+      </column>
+    </property>
+    <property name="surname" type="string">
+      <column length="30" name="surname"/>
+    </property>
+    <property name="pesel" type="string">
+      <column length="11" name="pesel" not-null="true">
+        <comment>PESEL</comment>
+      </column>
+    </property>
+    <property name="birthdate" type="date">
+      <column length="13" name="birthdate" not-null="true">
+        <comment>Data urodzenia</comment>
+      </column>
+    </property>
+    <property name="password" type="string">
+      <column length="50" name="password" not-null="true">
+        <comment>Has³o</comment>
+      </column>
+    </property>
+    <property name="isAdmin" type="boolean">
+      <column name="is_admin" not-null="true">
+        <comment>Czy jest to administrator</comment>
+      </column>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="lendses" table="lends">
+      <key>
+        <column length="256" name="who_lended" not-null="true">
+          <comment>Kto wypo¿yczy³</comment>
+        </column>
+      </key>
+      <one-to-many class="models.Lends"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="assetses" table="assets">
+      <key>
+        <column length="256" name="responsibler">
+          <comment>Uzytkownik odpowiedzialny za rodek</comment>
+        </column>
+      </key>
+      <one-to-many class="models.Assets"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="assetNoteses" table="asset_notes">
+      <key>
+        <column length="256" name="who_reported">
+          <comment>Kto zg³osi³</comment>
+        </column>
+      </key>
+      <one-to-many class="models.AssetNotes"/>
+    </set>
+  </class>
+</hibernate-mapping>

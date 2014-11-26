@@ -6,7 +6,7 @@
 package service;
 
 import java.util.List;
-import scrooge.models.AssetNotes;
+import models.AssetNotes;
 
 /**
  *

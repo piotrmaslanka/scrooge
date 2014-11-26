@@ -7,7 +7,7 @@ package dao;
 
 import java.util.List;
 import org.hibernate.SessionFactory;
-import scrooge.models.AssetNotes;
+import models.AssetNotes;
 
 /**
  *

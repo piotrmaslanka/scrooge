@@ -1,4 +1,4 @@
-package scrooge.models;
+package models;
 // Generated Nov 12, 2014 12:25:14 PM by Hibernate Tools 4.3.1
 
 

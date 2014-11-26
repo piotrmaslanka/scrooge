@@ -9,7 +9,7 @@ import dao.LocationDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import scrooge.models.Location;
+import models.Location;
 
 /**
  *

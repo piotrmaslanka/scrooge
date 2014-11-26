@@ -7,8 +7,8 @@ package dao;
 
 import java.util.List;
 import org.hibernate.SessionFactory;
-import scrooge.models.Report;
-import scrooge.models.Users;
+import models.Report;
+import models.Users;
 
 /**
  *
