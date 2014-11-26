@@ -1,8 +1,8 @@
 package components;
 import java.io.Serializable;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import models.Users;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import service.UsersService;
 /**
@@ -16,13 +16,19 @@ public class LoginState implements Serializable {
     
     public void setUser(Users user) { this.user = user; }
     public Users getUser() { return this.user; }
+    public void setUsersService(UsersService usersService) { this.usersService = usersService; }
     
-    @ManagedProperty(value = "#{usersServiceImpl}" )
+    @Autowired
     private UsersService usersService;    
-    /**
-     * Return whether the user is an admin
-     */
-    public boolean isAdmin() { return this.user.getIsAdmin(); }
+   
+    public boolean isAdmin() { 
+        if (this.user == null) return false;    // certainly not admin :)
+        return this.user.getIsAdmin();
+    }
+
+    public boolean isLoggedIn() {
+        return this.user != null;
+    }
     
     /**
      * Return whether authentication succeeded. If so, assigns user to internal store.
@@ -40,4 +46,13 @@ public class LoginState implements Serializable {
         }
         return false;
     }
+    
+    /**
+     * Logs user out
+     */
+    public void logout() {
+        this.user = null;
+    }
+    
+    
 }
