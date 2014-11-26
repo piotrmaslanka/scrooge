@@ -19,10 +19,16 @@ public class LoginState implements Serializable {
     
     @ManagedProperty(value = "#{usersServiceImpl}" )
     private UsersService usersService;    
-    /**
-     * Return whether the user is an admin
-     */
-    public boolean isAdmin() { return this.user.getIsAdmin(); }
+
+   
+    public boolean isAdmin() { 
+        if (this.user == null) return false;    // certainly not admin :)
+        return this.user.getIsAdmin();
+    }
+
+    public boolean isLoggedIn() {
+        return this.user != null;
+    }
     
     /**
      * Return whether authentication succeeded. If so, assigns user to internal store.
