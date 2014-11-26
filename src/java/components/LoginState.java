@@ -18,7 +18,7 @@ public class LoginState implements Serializable {
     public Users getUser() { return this.user; }
     public void setUsersService(UsersService usersService) { this.usersService = usersService; }
     
-    @ManagedProperty(value = "#{usersServiceImpl}" )
+    @Autowired
     private UsersService usersService;    
 
    
