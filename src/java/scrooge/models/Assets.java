@@ -145,10 +145,6 @@ public class Assets  implements java.io.Serializable {
     public void setReportItems(Set<ReportItem> reportItems) {
         this.reportItems = reportItems;
     }
-
-
-
-
 }
 
 

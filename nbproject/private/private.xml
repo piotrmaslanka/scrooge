@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/projects/scrooge/scrooge/web/test.xhtml</file>
+            <file>file:/D:/projects/scrooge/scrooge/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/D:/projects/scrooge/scrooge/src/java/service/UsersServiceImpl.java</file>
+            <file>file:/D:/projects/scrooge/scrooge/src/java/scrooge/models/Assets.java</file>
+            <file>file:/D:/projects/scrooge/scrooge/web/WEB-INF/web.xml</file>
+            <file>file:/D:/projects/scrooge/scrooge/src/java/dao/AssetNotesDAOImpl.java</file>
+            <file>file:/D:/projects/scrooge/scrooge/src/java/managedBeans/LendsManagedBean.java</file>
+            <file>file:/D:/projects/scrooge/scrooge/src/java/dao/AssetNotesDAO.java</file>
+            <file>file:/D:/projects/scrooge/scrooge/src/java/managedBeans/UserManagedBean.java</file>
+            <file>file:/D:/projects/scrooge/scrooge/src/java/service/UsersService.java</file>
+        </group>
+    </open-files>
+</project-private>

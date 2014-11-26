@@ -19,7 +19,9 @@
     <!-- Enable Spring Annotation Configuration -->
     <context:annotation-config />
     <!-- Scan for all of Spring components such as Spring Service -->
-    <context:component-scan base-package="com.journaldev.spring.service"></context:component-scan>
+    <context:component-scan base-package="dao"></context:component-scan>
+    <context:component-scan base-package="service"></context:component-scan>
+    <context:component-scan base-package="managedBeans"></context:component-scan>
     <!-- Create Data Source bean -->
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -28,7 +30,6 @@
         <property name="username" value="l4_common"/>
         <property name="password" value="fortheemperor"/>
     </bean>
-
 
     <!-- Define SessionFactory bean -->
     <bean id="sessionFactory"
@@ -46,5 +47,60 @@
     <!-- Detect @Transactional Annotation -->
     <tx:annotation-driven transaction-manager="transactionManager" />
     
-
+    <bean id="assetNotesDaoImpl" class="dao.AssetNotesDAOImpl">
+         <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="assetsDaoImpl" class="dao.AssetsDAOImpl">
+         <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="lendsDaoImpl" class="dao.LendsDAOImpl">
+         <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="locationDaoImpl" class="dao.LocationDAOImpl">
+         <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="reportDaoImpl" class="dao.ReportDAOImpl">
+         <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="reportItemDaoImpl" class="dao.ReportItemDAOImpl">
+         <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="userDaoImpl" class="dao.UsersDAOImpl">
+         <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id = "assetNotesServiceImpl" class = "service.AssetNotesServiceImpl">
+        <property name = "assetNotesDAO" ref = "assetNotesDaoImpl"/>
+    </bean>
+    
+    <bean id = "assetServiceImpl" class = "service.AssetsServiceImpl">
+        <property name = "assetDAO" ref = "assetsDaoImpl"/>
+    </bean>
+    
+    <bean id = "lendsServiceImpl" class = "service.LendsServiceImpl">
+        <property name = "lendsDAO" ref = "lendsDaoImpl"/>
+    </bean>
+    
+    <bean id = "locationServiceImpl" class = "service.LocationServiceImpl">
+        <property name = "locationDAO" ref = "locationDaoImpl"/>
+    </bean>
+    
+    <bean id = "reportItemServiceImpl" class = "service.ReportItemServiceImpl">
+        <property name = "reportItemDAO" ref = "reportItemDaoImpl"/>
+    </bean>
+    
+    <bean id = "reportServiceImpl" class = "service.ReportServiceImpl">
+        <property name = "reportDAO" ref = "reportDaoImpl"/>
+    </bean>
+    
+    <bean id = "usersServiceImpl" class = "service.UsersServiceImpl">
+        <property name = "usersDAO" ref = "userDaoImpl"/>
+    </bean>
+      
 </beans>
