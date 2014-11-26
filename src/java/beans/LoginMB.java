@@ -1,6 +1,7 @@
 package beans;
 
 import components.LoginState;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -23,13 +24,13 @@ public class LoginMB implements Serializable {
     public void setPassword(String password) { this.password = password; }
     public String getPassword() { return this.password; }
 
-    @ManagedProperty(value="#loginState")
+    @ManagedProperty(value="#{loginState}")
     private LoginState loginState;   
 
     public void setLoginState(LoginState loginState) { this.loginState = loginState; }
     
     
-    public void login() {
+    public void doLogin() {
         if (this.loginState.authenticate(this.login, this.password)) {
             // logged in
         } else {
@@ -37,7 +38,7 @@ public class LoginMB implements Serializable {
         }
     }
     
-    public void logout() {
+    public void doLogout() {
         this.loginState.logout();  
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
