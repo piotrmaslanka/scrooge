@@ -3,6 +3,7 @@ package beans;
 import components.LoginState;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -32,9 +33,13 @@ public class LoginMB implements Serializable {
     
     public void doLogin() {
         if (this.loginState.authenticate(this.login, this.password)) {
-            // logged in
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK", "Zalogowano."));
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("start.xhtml");
+            } catch (IOException e) {}
         } else {
-            // failed to login
+            FacesContext.getCurrentInstance().addMessage(null, 
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błąd", "Błędny login lub hasło."));
         }
     }
     

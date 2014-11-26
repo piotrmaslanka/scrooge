@@ -48,14 +48,14 @@ public class UsersDAOImpl implements UsersDAO{
 
     @Override
     public Users getUserById(int id) {
-       List list = getSessionFactory().getCurrentSession().createQuery("from users where id=?").setParameter(0,id).list();
+       List list = getSessionFactory().getCurrentSession().createQuery("from models.Users where id=?").setParameter(0,id).list();
        if (list.size() == 0) return null;
        return (Users)list.get(0);
     }
 
     @Override
     public Users getUserByLogin(String login) {
-       List list = getSessionFactory().getCurrentSession().createQuery("from users where login=?").setParameter(0, login).list();
+       List list = getSessionFactory().getCurrentSession().createQuery("from models.Users where login=?").setParameter(0, login).list();
        if (list.size() == 0) return null;
        return (Users)list.get(0);
     }
