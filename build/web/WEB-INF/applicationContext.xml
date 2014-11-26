@@ -21,7 +21,8 @@
     <!-- Scan for all of Spring components such as Spring Service -->
     <context:component-scan base-package="dao"></context:component-scan>
     <context:component-scan base-package="service"></context:component-scan>
-    <context:component-scan base-package="scrooge.beans"></context:component-scan>
+    <context:component-scan base-package="beans"></context:component-scan>
+    <context:component-scan base-package="components"></context:component-scan>
     <!-- Create Data Source bean -->
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -103,18 +104,9 @@
         <property name = "usersDAO" ref = "userDaoImpl"/>
     </bean>
       
-    <bean id = "LoginState" class = "components.LoginState">
+    <bean id = "loginState" class = "components.LoginState">
         <property name = "usersService" ref = "usersServiceImpl"/>
     </bean>    
-    
-    <bean id="usersMB" class="beans.UserMB">
-        <property name="loginState" ref="LoginState"/>
-    </bean>
-
-    <bean id="loginMB" class="beans.LoginMB">
-        <property name="loginState" ref="LoginState"/>
-    </bean>
-
 </beans>
 
 
