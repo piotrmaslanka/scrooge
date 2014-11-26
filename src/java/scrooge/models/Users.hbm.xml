@@ -32,6 +32,11 @@
                 <comment>Has&#179;o</comment>
             </column>
         </property>
+        <property name="isAdmin" type="boolean">
+            <column name="is_admin" not-null="true">
+                <comment>Czy jest to administrator</comment>
+            </column>
+        </property>        
         <set name="lendses" table="lends" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="who_lended" length="256" not-null="true">
