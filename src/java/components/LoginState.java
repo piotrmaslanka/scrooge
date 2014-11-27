@@ -14,6 +14,8 @@ import service.UsersService;
 public class LoginState implements Serializable {
     private Users user = null; // user that was logged in
     
+    private boolean isInvalidated = true;
+    
     public void setUser(Users user) { this.user = user; }
     public Users getUser() { return this.user; }
     public void setUsersService(UsersService usersService) { this.usersService = usersService; }
@@ -22,11 +24,13 @@ public class LoginState implements Serializable {
     private UsersService usersService;    
    
     public boolean isAdmin() { 
+        if (this.isInvalidated) return false;
         if (this.user == null) return false;    // certainly not admin :)
         return this.user.getIsAdmin();
     }
 
     public boolean isLoggedIn() {
+        if (this.isInvalidated) return false;
         return this.user != null;
     }
     
@@ -42,6 +46,7 @@ public class LoginState implements Serializable {
         if (u.getPassword().equals(password)) {
             // authenticated just right
             this.user = u;
+            this.isInvalidated = false;
             return true;
         }
         return false;
@@ -51,6 +56,7 @@ public class LoginState implements Serializable {
      * Logs user out
      */
     public void logout() {
+        this.isInvalidated = true;
         this.user = null;
     }
     

@@ -13,6 +13,9 @@
                 <p:outputLabel value="Czy jesteś adminem"></p:outputLabel>
                 <p:inputText value="#{dashboardMB.loginState.user.isAdmin}"></p:inputText>
            </p:panelGrid>
+        <h:form>
+           <p:commandButton value="Wyloguj" action="#{loginMB.doLogout}" ajax="false"/>
+        </h:form>
     </h:body>
 </html>
 

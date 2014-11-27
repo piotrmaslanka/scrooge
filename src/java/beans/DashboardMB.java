@@ -6,10 +6,12 @@
 package beans;
 
 import components.LoginState;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import service.AssetNotesService;
 
 /**
@@ -31,6 +33,11 @@ public class DashboardMB implements Serializable {
     public AssetNotesService getAssetNotesService() { return this.assetNotesService; }
     
     public int getOutstandingAssetNotesAmount() {
+        if (!this.loginState.isLoggedIn()) 
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+            } catch (IOException e) {}
+ 
         return this.assetNotesService.getAllAssetNotes().size();              
     }
     
