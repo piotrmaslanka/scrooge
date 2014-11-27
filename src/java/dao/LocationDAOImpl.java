@@ -48,13 +48,13 @@ public class LocationDAOImpl implements LocationDAO{
 
     @Override
     public Location getLocationById(int id) {
-       List list = getSessionFactory().getCurrentSession().createQuery("from location where id=?").setParameter(0,id).list();
+       List list = getSessionFactory().getCurrentSession().createQuery("from models.Location where id=?").setParameter(0,id).list();
        return (Location)list.get(0);
     }
 
     @Override
     public List<Location> getAllLocations() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from location").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.Location").list();
         return list;
     }
 }

@@ -48,13 +48,13 @@ public class LendsDAOImpl implements LendsDAO{
 
     @Override
     public Lends getLendById(int id) {
-       List list = getSessionFactory().getCurrentSession().createQuery("from lends where id=?").setParameter(0,id).list();
+       List list = getSessionFactory().getCurrentSession().createQuery("from models.Lends where id=?").setParameter(0,id).list();
        return (Lends)list.get(0);
     }
 
     @Override
     public List<Lends> getAllLends() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from lends").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.Lends").list();
         return list;
     }
 

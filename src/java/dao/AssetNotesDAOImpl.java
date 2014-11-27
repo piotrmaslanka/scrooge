@@ -33,13 +33,13 @@ public class AssetNotesDAOImpl implements AssetNotesDAO{
 
     @Override
     public AssetNotes getAssetNotesById(int id) {
-       List list = getSessionFactory().getCurrentSession().createQuery("from asset_notes where id=?").setParameter(0,id).list();
+       List list = getSessionFactory().getCurrentSession().createQuery("from models.AssetNotes where id=?").setParameter(0,id).list();
        return (AssetNotes)list.get(0);
     }
 
     @Override
     public List<AssetNotes> getAllAssetNotes() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from asset_notes").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.AssetNotes").list();
         return list;
     }
 

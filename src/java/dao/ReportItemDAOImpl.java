@@ -48,13 +48,13 @@ public class ReportItemDAOImpl implements ReportItemDAO{
 
     @Override
     public ReportItem getReportItemById(int id) {
-       List list = getSessionFactory().getCurrentSession().createQuery("from report_item where id=?").setParameter(0,id).list();
+       List list = getSessionFactory().getCurrentSession().createQuery("from models.ReportItem where id=?").setParameter(0,id).list();
        return (ReportItem)list.get(0);
     }
 
     @Override
     public List<ReportItem> getAllReportItems() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from report_item").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.ReportItem").list();
         return list;
     }
     

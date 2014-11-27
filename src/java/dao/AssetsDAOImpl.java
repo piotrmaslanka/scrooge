@@ -34,13 +34,13 @@ public class AssetsDAOImpl implements AssetsDAO{
 
     @Override
     public Assets getAssetById(int id) {
-       List list = getSessionFactory().getCurrentSession().createQuery("from assets where id=?").setParameter(0,id).list();
+       List list = getSessionFactory().getCurrentSession().createQuery("from models.Assets where id=?").setParameter(0,id).list();
        return (Assets)list.get(0);
     }
 
     @Override
     public List<Assets> getAllAssets() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from assets").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.Assets").list();
         return list;
     }
     

@@ -49,13 +49,13 @@ public class ReportDAOImpl implements ReportDAO{
 
     @Override
     public Report getReportById(int id) {
-       List list = getSessionFactory().getCurrentSession().createQuery("from report where id=?").setParameter(0,id).list();
+       List list = getSessionFactory().getCurrentSession().createQuery("from models.Report where id=?").setParameter(0,id).list();
        return (Report)list.get(0);
     }
 
     @Override
     public List<Report> getAllRepors() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from report").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.Report").list();
         return list;
     }
 }
