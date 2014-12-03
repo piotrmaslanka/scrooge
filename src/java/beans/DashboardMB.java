@@ -38,7 +38,7 @@ public class DashboardMB implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {}
  
-        return this.assetNotesService.getAllAssetNotes().size();              
+        return this.assetNotesService.getUnsolvedAssetNotes().size();              
     }
     
 }

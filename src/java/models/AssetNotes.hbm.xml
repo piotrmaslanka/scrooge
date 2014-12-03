@@ -38,5 +38,10 @@
         <comment>Powód zg³oszenia</comment>
       </column>
     </property>
+    <property name="isSolved" type="boolean">
+      <column name="is_solved" not-null="true">
+        <comment>Czy nota została za³atwiona</comment>
+      </column>
+    </property>    
   </class>
 </hibernate-mapping>

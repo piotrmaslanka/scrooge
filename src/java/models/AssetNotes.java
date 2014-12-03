@@ -17,17 +17,19 @@ public class AssetNotes  implements java.io.Serializable {
      private boolean isDamaged;
      private boolean isLost;
      private String reason;
+     private boolean isSolved;
 
     public AssetNotes() {
     }
 
 	
-    public AssetNotes(int id, boolean isDamaged, boolean isLost) {
+    public AssetNotes(int id, boolean isDamaged, boolean isLost, boolean isSolved) {
         this.id = id;
         this.isDamaged = isDamaged;
         this.isLost = isLost;
+        this.isSolved = isSolved;
     }
-    public AssetNotes(int id, Assets assets, Users users, Date whenCreated, boolean isDamaged, boolean isLost, String reason) {
+    public AssetNotes(int id, Assets assets, Users users, Date whenCreated, boolean isDamaged, boolean isLost, String reason, boolean isSolved) {
        this.id = id;
        this.assets = assets;
        this.users = users;
@@ -35,6 +37,7 @@ public class AssetNotes  implements java.io.Serializable {
        this.isDamaged = isDamaged;
        this.isLost = isLost;
        this.reason = reason;
+       this.isSolved = isSolved;
     }
    
     public int getId() {
@@ -86,9 +89,14 @@ public class AssetNotes  implements java.io.Serializable {
     public void setReason(String reason) {
         this.reason = reason;
     }
-
-
-
+    
+    public boolean getIsSolved() { 
+        return this.isSolved;
+    }
+    
+    public void setIsSolved(boolean isSolved) {
+        this.isSolved = isSolved;
+    }
 
 }
 
