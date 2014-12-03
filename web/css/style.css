@@ -1,0 +1,65 @@
+body {
+    background: cyan;
+    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#loginform {
+    position: absolute; 
+    top: 250px; 
+    left: 45%; //????
+    text-align: center;
+}
+
+#menu_logout {
+    margin-left: 50px;
+}
+
+#topmenu {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 20%;
+}
+
+#menu {
+    margin-left: -35px;
+}
+
+#menu ul {
+    list-style-type: none;
+    width: 400px;
+} 
+
+#menu li {
+    border: 1px dotted #999;
+    border-width: 1px 0;
+    margin: 5px 0;
+}
+
+#menu li a { 
+    color: #990000;
+    display: block;
+    font: bold 120% Arial, Helvetica, sans-serif;
+    padding: 5px;
+    text-decoration: none;
+}
+
+* html #menu li a {  /* make hover effect work in IE */
+    width: 400px;
+}
+
+#menu li a:hover {
+    background: #ffffcc;
+}
+
+#menu a em { 
+    color: #333;
+    display: block;
+    font: normal 85% Verdana, Helvetica, sans-serif;
+    line-height: 125%; 
+}
+
+#menu a span {
+    color: #125F15;
+    font: normal 70% Verdana, Helvetica, sans-serif;
+    line-height: 150%;
+}
