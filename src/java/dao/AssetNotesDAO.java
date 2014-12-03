@@ -22,5 +22,6 @@ public interface AssetNotesDAO {
     public AssetNotes getAssetNotesById(int id);
     
     public List<AssetNotes> getAllAssetNotes();
+    public List<AssetNotes> getUnsolvedAssetNotes();
     
 }
