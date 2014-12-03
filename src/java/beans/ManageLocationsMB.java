@@ -4,6 +4,7 @@ import components.LoginState;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -28,8 +29,12 @@ public class ManageLocationsMB implements Serializable {
     private LocationService locationService;    
 
     public void setLocationService(LocationService locationService) { this.locationService = locationService; }
-    public LocationService getLocationService() { return this.locationService; }    
-
+    public LocationService getLocationService() { return this.locationService; }
+    
+    private Location location = new Location();
+    public void setLocation(Location location) { this.location = location; }
+    public Location getLocation() { return this.location; }
+    
     /**
      * Serves to get all locations. Access as a property.
      */
@@ -40,5 +45,18 @@ public class ManageLocationsMB implements Serializable {
             } catch (IOException e) {}
  
         return this.locationService.getAllLocations();
+    }
+    
+    /**
+     * Add location
+     */
+    public void addLocation() {
+        if (!this.loginState.isAdmin())
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
+            } catch (IOException e) {}
+        this.locationService.addLocation(this.location);
+        FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Dodano", "Dodano nową salę"));        
     }
 }

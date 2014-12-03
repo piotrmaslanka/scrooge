@@ -7,12 +7,20 @@
     <h:head>
         <title>Scrooge - Dashboard</title>
     </h:head>
-    <h:form id="form">
     <h:body>
-        <p:dataList value="#{manageLocationsMB.allLocations}" var="location" type="ordered">
-            <f:facet name="header">Locations</f:facet>
-            #{location.id}
-        </p:dataList>
+        <h:form id="form">
+            <p:dataList value="#{manageLocationsMB.allLocations}" var="location" type="ordered">
+                <f:facet name="header">Locations</f:facet>
+                #{location.id}
+            </p:dataList>
+        </h:form>
+        <h:form id="form2">
+           <p:growl id="messages"></p:growl>
+           <p:panelGrid columns="2">
+                <p:outputLabel value="Nazwa nowej sali"></p:outputLabel>
+                <p:inputText value="#{manageLocationsMB.location.id}"></p:inputText>  
+            </p:panelGrid>                           
+            <p:commandButton value="Dodaj salę" action="#{manageLocationsMB.addLocation}" update="messages" ajax="false"></p:commandButton>
+        </h:form>
     </h:body>
-    </h:form>
 </html>
