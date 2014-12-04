@@ -11,7 +11,10 @@
         <h:form id="form">
             <p:dataList value="#{manageLocationsMB.allLocations}" var="location" type="ordered">
                 <f:facet name="header">Locations</f:facet>
-                #{location.id}
+                <h:outputLink id="link#{location.id}" value="manage.xhtml">
+                    <f:param name="location" value="#{location.id}" />
+                    <h:outputText value="#{location.id}" />
+                </h:outputLink>          
             </p:dataList>
         </h:form>
         <h:form id="form2">
