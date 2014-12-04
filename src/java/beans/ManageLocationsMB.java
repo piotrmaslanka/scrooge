@@ -4,6 +4,7 @@ import components.LoginState;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -58,5 +59,16 @@ public class ManageLocationsMB implements Serializable {
         this.locationService.addLocation(this.location);
         FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Dodano", "Dodano nową salę"));        
+    }
+    
+    
+    /**
+     * Load a location
+     * specified by GET
+     */
+    public void loadLocation() {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        int lid = Integer.getInteger(params.get("location"));
+        this.location = this.locationService.getLocationById(lid);
     }
 }
