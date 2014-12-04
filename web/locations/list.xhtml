@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Scrooge - Dashboard</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:dataList value="#{manageLocationsMB.allLocations}" var="location" type="ordered">
+                <f:facet name="header">Locations</f:facet>
+                <h:outputLink id="link#{location.id}" value="manage.xhtml">
+                    <f:param name="location" value="#{location.id}" />
+                    <h:outputText value="#{location.id}" />
+                </h:outputLink>          
+            </p:dataList>
+        </h:form>
+        <h:form id="form2">
+           <p:growl id="messages"></p:growl>
+           <p:panelGrid columns="2">
+                <p:outputLabel value="Nazwa nowej sali"></p:outputLabel>
+                <p:inputText value="#{manageLocationsMB.location.id}"></p:inputText>  
+            </p:panelGrid>                           
+            <p:commandButton value="Dodaj salę" action="#{manageLocationsMB.addLocation}" update="messages" ajax="false"></p:commandButton>
+        </h:form>
+    </h:body>
+</html>
