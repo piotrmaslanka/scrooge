@@ -47,7 +47,7 @@ public class LocationDAOImpl implements LocationDAO{
     }
 
     @Override
-    public Location getLocationById(int id) {
+    public Location getLocationById(String id) {
        List list = getSessionFactory().getCurrentSession().createQuery("from models.Location where id=?").setParameter(0,id).list();
        return (Location)list.get(0);
     }

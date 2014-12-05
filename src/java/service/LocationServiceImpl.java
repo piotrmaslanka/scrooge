@@ -36,7 +36,7 @@ public class LocationServiceImpl implements LocationService{
     }
 
     @Override
-    public Location getLocationById(int id) {
+    public Location getLocationById(String id) {
         return getLocationDAO().getLocationById(id);
     }
 

@@ -68,7 +68,6 @@ public class ManageLocationsMB implements Serializable {
      */
     public void loadLocation() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        int lid = Integer.getInteger(params.get("location"));
-        this.location = this.locationService.getLocationById(lid);
+        this.location = this.locationService.getLocationById(params.get("location"));
     }
 }

@@ -20,7 +20,7 @@ public interface LocationDAO {
     
     public void updateLocation(Location location);
     
-    public Location getLocationById(int id);
+    public Location getLocationById(String id);
     
     public List<Location> getAllLocations();
      
