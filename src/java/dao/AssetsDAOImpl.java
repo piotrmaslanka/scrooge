@@ -44,6 +44,13 @@ public class AssetsDAOImpl implements AssetsDAO{
         return list;
     }
     
+    @Override
+    public List<Assets> getAssetsByLocation(String location) {
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.Assets where location=?").setParameter(0, location).list();
+        return list;
+    
+    }    
+    
     /**
      * @return the SessionFactory
      */

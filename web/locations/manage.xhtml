@@ -9,6 +9,14 @@
         #{manageLocationsMB.loadLocation()}        
     </h:head>
     <h:body>
-        Sala nazywa się <h:outputText value="#{manageLocationsMB.location.id}" />
+        Sala nazywa się <h:outputText value="#{manageLocationsMB.location.id}" />.
+        
+        Lista sprzętów:
+        <h:form id="form">
+            <p:dataList value="#{manageLocationsMB.location.assetses}" var="asset" type="ordered">
+                <f:facet name="header">Środki</f:facet>
+                #{asset.id}: #{asset.description}
+            </p:dataList>
+        </h:form>        
     </h:body>
 </html>

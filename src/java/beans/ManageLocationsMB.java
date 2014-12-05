@@ -3,6 +3,7 @@ package beans;
 import components.LoginState;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
@@ -11,6 +12,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import models.Location;
+import service.AssetsService;
 import service.LocationService;
 
 /**
@@ -29,6 +31,11 @@ public class ManageLocationsMB implements Serializable {
     @ManagedProperty(value="#{locationServiceImpl}")
     private LocationService locationService;    
 
+    @ManagedProperty(value="#{assetsServiceImpl}")
+    private AssetsService assetsService;
+    
+    public void setAssetsService(AssetsService assetsService) { this.assetsService = assetsService; }
+    public AssetsService getAssetsService() { return this.assetsService; }
     public void setLocationService(LocationService locationService) { this.locationService = locationService; }
     public LocationService getLocationService() { return this.locationService; }
     

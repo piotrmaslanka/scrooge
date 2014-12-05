@@ -45,6 +45,11 @@ public class AssetsServiceImpl implements AssetsService{
         return getAssetDAO().getAllAssets();
     }
 
+    @Override
+    public List<Assets> getAssetsByLocation(String location) {
+        return getAssetDAO().getAssetsByLocation(location);
+    }    
+    
     /**
      * @return the assetDAO
      */
