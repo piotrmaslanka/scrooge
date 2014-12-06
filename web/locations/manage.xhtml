@@ -6,17 +6,43 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Scrooge - Manage Location</title>
-        #{manageLocationsMB.loadLocation()}        
+        #{manageAssetsMB.loadLocation()}        
     </h:head>
     <h:body>
-        Sala nazywa się <h:outputText value="#{manageLocationsMB.location.id}" />.
-        
+        Sala nazywa się <h:outputText value="#{manageAssetsMB.location.id}" />.
+  
         Lista sprzętów:
         <h:form id="form">
-            <p:dataList value="#{manageLocationsMB.location.assetses}" var="asset" type="ordered">
+            <p:dataList value="#{manageAssetsMB.assets}" var="asset" type="ordered">
                 <f:facet name="header">Środki</f:facet>
                 #{asset.id}: #{asset.description}
             </p:dataList>
+        </h:form>        
+        
+        Dodaj środek:
+        <h:form id="form2">
+           <p:growl id="messages"></p:growl>
+           <p:panelGrid columns="2">
+                <p:outputLabel value="Nr ewidencyjny"></p:outputLabel>
+                <p:inputText value="#{manageAssetsMB.asset.id}"></p:inputText>  
+                <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
+                <p:inputText value="#{manageAssetsMB.asset.users}"></p:inputText>  
+                <p:outputLabel value="Data zakupu"></p:outputLabel>
+                <p:calendar value="#{manageAssetsMB.asset.purchaseDate}" /> 
+                <p:outputLabel value="Opis"></p:outputLabel>
+                <p:inputText value="#{manageAssetsMB.asset.description}"></p:inputText>  
+                <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
+                <p:inputText value="#{manageAssetsMB.asset.extraInfo}"></p:inputText>  
+                <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLendable}" />
+                <p:outputLabel value="Środek materialny?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isMaterial}" />
+                <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isDamaged}" />
+                <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLost}" />
+            </p:panelGrid>                           
+            <p:commandButton value="Dodaj środek" action="#{manageAssetsMB.addAsset()}" update="messages" ajax="false"></p:commandButton>
         </h:form>        
     </h:body>
 </html>

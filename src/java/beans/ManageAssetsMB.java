@@ -3,23 +3,26 @@ package beans;
 import components.LoginState;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import models.Assets;
 import models.Location;
 import service.AssetsService;
 import service.LocationService;
 
 /**
- * Bean for managing locations
+ *
  * @author Maslanka
  */
-@ManagedBean(name = "manageLocationsMB")
+@ManagedBean(name = "manageAssetsMB")
 @RequestScoped
-public class ManageLocationsMB implements Serializable {
+public class ManageAssetsMB implements Serializable {
     @ManagedProperty(value="#{loginState}")
     private LoginState loginState;   
 
@@ -35,37 +38,43 @@ public class ManageLocationsMB implements Serializable {
     public void setAssetsService(AssetsService assetsService) { this.assetsService = assetsService; }
     public AssetsService getAssetsService() { return this.assetsService; }
     public void setLocationService(LocationService locationService) { this.locationService = locationService; }
-    public LocationService getLocationService() { return this.locationService; }
-    
+    public LocationService getLocationService() { return this.locationService; }    
+
+
     private Location location = new Location();
     public void setLocation(Location location) { this.location = location; }
     public Location getLocation() { return this.location; }
-
-    /**
-     * Serves to get all locations. Access as a property.
-     */
-    public List<Location> getAllLocations() {
-        if (!this.loginState.isAdmin())
-            try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
-            } catch (IOException e) {}
  
-        return this.locationService.getAllLocations();
+    private List<Assets> assets = new ArrayList<>();
+    public void setAssets(List<Assets> assets) { this.assets = assets; }
+    public List<Assets> getAssets() { return this.assets; }
+   
+    private Assets asset = new Assets();
+    public void setAsset(Assets asset) { this.asset = asset; }
+    public Assets getAsset() { return this.asset; }
+        
+    /**
+     * Load a location
+     * specified by GET
+     */
+    public void loadLocation() {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        this.location = this.locationService.getLocationById(params.get("location"));
+        this.assets = this.assetsService.getAssetsByLocation(params.get("location"));
+        this.asset.setLocation(this.location);
     }
-
-    public void setAllLocations(List<Location> locations) {}
-
+    
+    
     /**
      * Add location
      */
-    public void addLocation() {
+    public void addAsset() {
         if (!this.loginState.isAdmin())
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
             } catch (IOException e) {}
-        this.locationService.addLocation(this.location);
+        this.assetsService.addAsset(this.asset);
         FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Dodano", "Dodano nową salę"));        
-    }
-
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Dodano", "Dodano nowy środek"));        
+    }    
 }
