@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</h:head>
+<h:body>
+	<div id="header">
+				<div id="logo">
+					<a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+				</div>
+				<div id="text">
+				<p>System ewidencji majatku</p>
+				</div>
+			
+	</div>
+
+	<div id="menu">
+		<h:form>
+			<ul>
+				<li><p>Zalogowany jako użytkownik.</p></li>
+				<li><p:commandButton value="Zgłoszenia"
+						actionListener="#{bookBean.saveBook}" /></li>
+				<li><p:commandButton value="Wypozyczenia"
+						actionListener="#{bookBean.saveBook}" /></li>
+				<li><p:commandButton value="Raporty"
+						actionListener="#{bookBean.saveBook}" /></li>
+				<li class="down"><p:commandButton value="Wyloguj"
+						actionListener="#{bookBean.saveBook}" /></li>
+			</ul>
+		</h:form>
+	</div>
+
+	<div id="container">
+		<h:form>
+			<p:tabView>
+				<p:tab title="Informacje podstawowe">
+					<table>
+						<tr>
+							<td><p>Id:</p></td>
+							<td><p:inputText value="#{bean.propertyName}" /></td>
+						</tr>
+						<tr>
+							<td><p>Lokacja:</p></td>
+							<td><p:inputText value="#{bean.propertyName}" /></td>
+						</tr>
+						<tr>
+							<td><p>Osoba odpowiedzialna:</p></td>
+							<td><p:inputText value="#{bean.propertyName}" /></td>
+						</tr>
+						<tr>
+							<td><p>Data zakupu:</p></td>
+							<td><p:inputText value="#{bean.propertyName}" /></td>
+						</tr>
+						<tr><p>Informacje dodatkowe</p></tr>
+						
+
+					</table>
+				</p:tab>
+				<p:tab title="Informacje dodatkowe">
+					<table>
+						<tr>
+							<td><p>Czy srodek podlega wypozyczeniu:</p></td>
+							<td><p:selectBooleanButton id="value2" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+						</tr>
+						<tr>
+							<td><p>Czy to jest srodek materialny:</p></td>
+							<td><p:selectBooleanButton id="value3" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+						</tr>
+						<tr>
+							<td><p>Uszkodzony:</p></td>
+							<td><p:selectBooleanButton id="value4" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+						</tr>
+						<tr>
+							<td><p>Zgubiony:</p></td>
+							<td><p:selectBooleanButton id="value5" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+						</tr>
+						<tr>
+							<td><p>Skradziony:</p></td>
+							<td><p:selectBooleanButton id="value6" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+						</tr>
+					</table>
+				</p:tab>
+				<p:tab title="Opis skladnika">
+					<h:outputText value="Dolor" />
+				</p:tab>
+				<p:tab title="Komentarz">
+					<h:outputText value="Dolor" />
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</div>
+
+
+
+	<div id="footer">
+		<div id="footer_text">
+			<p>Copyright &copy; by L4</p>
+		</div>
+	</div>
+
+
+
+</h:body>
+
+</html>

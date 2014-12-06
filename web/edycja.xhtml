@@ -1,14 +1,224 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+
     <h:head>
-        <title>Scrooge - Dashboard</title>
-        <link href="css/style.css" rel="stylesheet"></link>
+        <link rel="stylesheet" type="text/css" href="style.css" />
     </h:head>
     <h:body>
-        EDYCJA
-    </h:body>
-</html>
+        <div id="header">
+            <div id="logo">
+                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+            </div>
+            <div id="text">
+                <p>System ewidencji majatku</p>
+            </div>
 
+        </div>
+
+        <div id="menu">
+            <h:form>
+                <ul>
+                    <li>
+                        <p>
+                            Zalogowany jako: <p:outputLabel value="#{dashboardMB.loginState.user.login}"></p:outputLabel><br></br>
+                            Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
+                        </p>
+                    </li>
+
+                    <li><p:commandButton value="Raporty"
+                                         actionListener="#{dashboardMB.raportyRedirect()}" /></li>
+                    <li><p:commandButton value="Rejestr wypozyczen"
+                                         actionListener="#{dashboardMB.rejestrRedirect()}" /></li>
+                    <li><p:commandButton value="Zarzadzanie kontami"
+                                         actionListener="#{bookBean.saveBook}" /></li>
+                    <li><p:commandButton value="Edycja majatku"
+                                         actionListener="#{dashboardMB.edycjaRedirect()}" /></li>
+                    <li><p:commandButton value="Zgłoszenia"
+                                         actionListener="#{dashboardMB.zgloszeniaRedirect()}" /></li>
+                    <li><p:commandButton value="Audyt"
+                                         actionListener="#{dashboardMB.audytRedirect()}" /></li>
+                    <li class="down"><p:commandButton value="Wyloguj"
+                                                      actionListener="#{loginMB.doLogout()}" /></li>
+                </ul>
+            </h:form>
+        </div>
+
+        <div id="container">
+            <h:form>
+                <p:tabView>
+                    <p:tab title="Dodaj">
+                        <div id="lewy">
+                            <table>
+                                <tr>
+                                    <td><p>Id:</p></td>
+                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Lokacja:</p></td>
+                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Osoba odpowiedzialna:</p></td>
+                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Data zakupu:</p></td>
+                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Opis:</p></td>
+                                    <td><p:inputTextarea rows="4" cols="33" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Informacje dodatkowe:</p></td>
+                                    <td><p:inputTextarea rows="4" cols="33" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="prawy">
+                            <table>
+                                <tr><p>Informacje dodatkowe</p></tr>
+                                <tr>
+                                    <td><p>Srodek materialny:</p></td>
+                                    <td><p:selectBooleanButton id="value1" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Wypozyczony:</p></td>
+                                    <td><p:selectBooleanButton id="value2" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Uszkodzony:</p></td>
+                                    <td><p:selectBooleanButton id="value3" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Zgubiony:</p></td>
+                                    <td><p:selectBooleanButton id="value4" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Skradziony:</p></td>
+                                    <td><p:selectBooleanButton id="value5" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>				
+                            </table>
+                            <p class="x">
+                                <p:commandButton value="Akceptuj"
+                                                 actionListener="#{bookBean.saveBook}" /></p>
+
+                        </div>
+                    </p:tab>
+                    <p:tab title="Usun">
+                        <div id="lewy">
+                            <table>
+                                <tr>
+                                    <td><p>Id:</p></td>
+                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                </tr>
+
+
+                            </table>
+                            <table>
+                                <tr><td><p>Lista właściwości składnika majatku</p></td></tr>
+                                <tr>
+                                    <td><p:panelGrid columns="3" layout="grid">           
+                                            <h:outputText value="" />
+                                            <h:outputText value="" />
+                                            <h:outputText value="" />
+
+                                            <h:outputText value="" />
+                                            <h:outputText value="" />
+                                            <h:outputText value="" />
+
+                                            <h:outputText value="" />
+                                            <h:outputText value="" />
+                                            <h:outputText value="" />
+                                        </p:panelGrid></td></tr></table>
+                        </div>
+                        <div id="prawy">
+                            <p class="x">
+                                <p:commandButton value="Akceptuj"
+                                                 actionListener="#{bookBean.saveBook}" /></p>
+
+                        </div>
+                    </p:tab>
+
+                    <p:tab title="Edytuj">
+                        <div id="lewy">
+                            <table>
+                                <tr>
+                                    <td><p>Id:</p></td>
+                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Lokacja:</p></td>
+                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Osoba odpowiedzialna:</p></td>
+                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Data zakupu:</p></td>
+                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Opis:</p></td>
+                                    <td><p:inputTextarea rows="4" cols="33" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Informacje dodatkowe:</p></td>
+                                    <td><p:inputTextarea rows="4" cols="33" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="prawy">
+                            <table>
+                                <tr><p>Informacje dodatkowe</p></tr>
+                                <tr>
+                                    <td><p>Srodek materialny:</p></td>
+                                    <td><p:selectBooleanButton id="value21" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Wypozyczony:</p></td>
+                                    <td><p:selectBooleanButton id="value22" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Uszkodzony:</p></td>
+                                    <td><p:selectBooleanButton id="value23" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Zgubiony:</p></td>
+                                    <td><p:selectBooleanButton id="value24" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Skradziony:</p></td>
+                                    <td><p:selectBooleanButton id="value25" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
+                                </tr>				
+                            </table>
+                            <p class="x">
+                                <p:commandButton value="Akceptuj"
+                                                 actionListener="#{bookBean.saveBook}" /></p>
+
+                        </div>
+                    </p:tab>
+                </p:tabView>
+            </h:form>
+        </div>
+
+
+
+        <div id="footer">
+            <div id="footer_text">
+                <p>Copyright &copy; by L4</p>
+            </div>
+        </div>
+
+
+
+    </h:body>
+
+</html>

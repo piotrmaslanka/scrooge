@@ -1,23 +1,63 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+
     <h:head>
-        <link href="css/style.css" rel="stylesheet"></link>
-        <title>Scrooge - Login</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
     </h:head>
     <h:body>
-        <p:growl id="messages"></p:growl> 
-        <h:form>
-            <p:panelGrid columns="2">
-                <p:outputLabel value="Login:"></p:outputLabel>
-                <p:inputText value="#{loginMB.login}"></p:inputText>
-                <p:outputLabel value="Hasło: "></p:outputLabel>
-                <p:password value="#{loginMB.password}" ></p:password>
-            </p:panelGrid>
-            <p:commandButton value="Zaloguj" action="#{loginMB.doLogin}" update="messages" ajax="false"></p:commandButton>
-        </h:form>
-    </h:body>
-</html>
+        <div id="header">
+            <div id="logo">
+                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+            </div>
+            <div id="text">
+                <p>System ewidencji majatku</p>
+            </div>
 
+        </div>
+
+
+
+        <div id="container">
+            <h:form>
+                <div id="login">
+                    <table>
+                        <tr>
+                            <td><p>Login:</p></td>
+                            <td><p:inputText value="#{loginMB.login}" /></td>
+                        </tr>
+                        <tr>
+                            <td><p>Haslo:</p></td>
+                            <td><p:password value="#{loginMB.password}" feedback="true|false" /></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <h:form>
+                                    <p:commandButton value="Zaloguj" action="#{loginMB.doLogin}" update="messages" ajax="false"></p:commandButton>
+                                    <p:commandButton type="reset2" value="Rejestracja" />
+                                </h:form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </h:form>
+        </div>
+
+
+
+        <div id="footer">
+            <div id="footer_text">
+                <p>Copyright &copy; by L4</p></div>
+        </div>
+
+
+
+    </h:body>
+
+</html>

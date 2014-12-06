@@ -30,6 +30,7 @@
                             Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
                         </p>
                     </li>
+
                     <li><p:commandButton value="Raporty"
                                          actionListener="#{dashboardMB.raportyRedirect()}" /></li>
                     <li><p:commandButton value="Rejestr wypozyczen"
@@ -49,52 +50,7 @@
         </div>
 
         <div id="container">
-            <h:form>
-
-                <h:panelGrid columns="3" cellpadding="5">
-                    <h:outputLabel for="menu1" />
-                    <p:selectCheckboxMenu id="menu1" value="#{bean.func}" label="Sala"
-                                          filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                        <f:selectItems value="#{bean.func}" />
-                    </p:selectCheckboxMenu>
-                    <p:commandLink value="Wybierz"/>
-                </h:panelGrid>
-
-                <p:dataTable var="VAR" value="#{bean.func}">
-                    <p:column headerText="Id">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
-
-                    <p:column headerText="Lokacja">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
-
-                    <p:column headerText="Os. odpowiedzialna">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
-
-                    <p:column headerText="Data zakupu">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
-
-                    <p:column headerText="Inf. dodatkowe">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
-
-                    <p:column headerText="Zgubiony?">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
-
-                    <p:column headerText="Zniszczony?">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
-                </p:dataTable>
-
-
-                <p class="x">
-                    <p:commandButton value="Potwierdź"
-                                     actionListener="#{bookBean.saveBook}" /></p>	
-            </h:form>
+            admin
         </div>
 
 
