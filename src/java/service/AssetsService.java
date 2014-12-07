@@ -7,6 +7,7 @@ package service;
 
 import java.util.List;
 import models.Assets;
+import models.Location;
 
 /**
  *
@@ -22,7 +23,7 @@ public interface AssetsService {
     
     public Assets getAssetById(int id);
     
-    public List<Assets> getAssetsByLocation(String location);
+    public List<Assets> getAssetsByLocation(Location location);
     
     public List<Assets> getAllAssets();
         

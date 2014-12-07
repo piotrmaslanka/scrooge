@@ -62,7 +62,7 @@ public class UsersDAOImpl implements UsersDAO{
     
     @Override
     public List<Users> getAllUsers() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from users").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.Users").list();
         return list;
     }
 }

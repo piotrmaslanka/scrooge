@@ -6,7 +6,6 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Scrooge - Manage Location</title>
-        #{manageAssetsMB.loadLocation()}        
     </h:head>
     <h:body>
         Sala nazywa się <h:outputText value="#{manageAssetsMB.location.id}" />.
@@ -26,7 +25,11 @@
                 <p:outputLabel value="Nr ewidencyjny"></p:outputLabel>
                 <p:inputText value="#{manageAssetsMB.asset.id}"></p:inputText>  
                 <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
-                <p:inputText value="#{manageAssetsMB.asset.users}"></p:inputText>  
+                <p:selectOneMenu value="#{manageAssetsMB.targetUser}">
+                    <f:selectItem itemLabel="Wybierz użytkownika" />
+                    <f:selectItems value="#{manageAssetsMB.userChoices}" />
+                </p:selectOneMenu>
+                
                 <p:outputLabel value="Data zakupu"></p:outputLabel>
                 <p:calendar value="#{manageAssetsMB.asset.purchaseDate}" /> 
                 <p:outputLabel value="Opis"></p:outputLabel>

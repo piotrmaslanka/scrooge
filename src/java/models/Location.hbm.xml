@@ -8,7 +8,7 @@
       <column length="10" name="id"/>
       <generator class="assigned"/>
     </id>
-    <set fetch="select" inverse="true" lazy="true" name="reports" table="report">
+    <set fetch="select" inverse="true" lazy="false" name="reports" table="report">
       <key>
         <column length="10" name="location" not-null="true">
           <comment>Pe³na nazwa sali</comment>
@@ -16,7 +16,7 @@
       </key>
       <one-to-many class="models.Report"/>
     </set>
-    <set fetch="select" inverse="true" lazy="true" name="assetses" table="assets">
+    <set fetch="select" inverse="true" lazy="false" name="assetses" table="assets">
       <key>
         <column length="10" name="location">
           <comment>Pe³na nazwa sali (po³o¿enie rodka)</comment>

@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import models.Assets;
+import models.Location;
 
 /**
  *
@@ -46,7 +47,7 @@ public class AssetsServiceImpl implements AssetsService{
     }
 
     @Override
-    public List<Assets> getAssetsByLocation(String location) {
+    public List<Assets> getAssetsByLocation(Location location) {
         return getAssetDAO().getAssetsByLocation(location);
     }    
     

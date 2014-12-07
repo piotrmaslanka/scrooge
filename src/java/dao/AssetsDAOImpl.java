@@ -8,6 +8,7 @@ package dao;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import models.Assets;
+import models.Location;
 
 /**
  *
@@ -45,7 +46,7 @@ public class AssetsDAOImpl implements AssetsDAO{
     }
     
     @Override
-    public List<Assets> getAssetsByLocation(String location) {
+    public List<Assets> getAssetsByLocation(Location location) {
         List list = getSessionFactory().getCurrentSession().createQuery("from models.Assets where location=?").setParameter(0, location).list();
         return list;
     
