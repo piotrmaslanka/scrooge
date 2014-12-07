@@ -20,25 +20,82 @@ import service.AssetNotesService;
 @ManagedBean(name = "dashboardMB")
 @SessionScoped
 public class DashboardMB implements Serializable {
-    @ManagedProperty(value="#{loginState}")
-    private LoginState loginState;   
-    
-    public void setLoginState(LoginState loginState) { this.loginState = loginState; }
-    public LoginState getLoginState() { return this.loginState; }
-    
-    @ManagedProperty(value="#{assetNotesServiceImpl}")
+
+    @ManagedProperty(value = "#{loginState}")
+    private LoginState loginState;
+
+    public void setLoginState(LoginState loginState) {
+        this.loginState = loginState;
+    }
+
+    public LoginState getLoginState() {
+        return this.loginState;
+    }
+
+    @ManagedProperty(value = "#{assetNotesServiceImpl}")
     private AssetNotesService assetNotesService;
-    
-    public void setAssetNotesService(AssetNotesService assetNotesService) { this.assetNotesService = assetNotesService; }
-    public AssetNotesService getAssetNotesService() { return this.assetNotesService; }
-    
+
+    public void setAssetNotesService(AssetNotesService assetNotesService) {
+        this.assetNotesService = assetNotesService;
+    }
+
+    public AssetNotesService getAssetNotesService() {
+        return this.assetNotesService;
+    }
+
     public int getOutstandingAssetNotesAmount() {
-        if (!this.loginState.isLoggedIn()) 
+        if (!this.loginState.isLoggedIn()) {
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
-            } catch (IOException e) {}
- 
-        return this.assetNotesService.getUnsolvedAssetNotes().size();              
+            } catch (IOException e) {
+            }
+        }
+        return this.assetNotesService.getAllAssetNotes().size();
     }
-    
+
+    public void raportyRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("raporty.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    public void audytRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("audyt.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    public void edycjaRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("edycja.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    public void rejestrRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("rejestr.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    public void zgloszeniaRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("zgloszenia.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
 }

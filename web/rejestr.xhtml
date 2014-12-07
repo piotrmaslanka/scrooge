@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </h:head>
+    <h:body>
+        <div id="header">
+            <div id="logo">
+                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+            </div>
+            <div id="text">
+                <p>System ewidencji majatku</p>
+            </div>
+
+        </div>
+
+        <div id="menu">
+            <h:form>
+                <ul>
+                    <li>
+                        <p>
+                            Zalogowany jako: <p:outputLabel value="#{dashboardMB.loginState.user.login}"></p:outputLabel><br></br>
+                            Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
+                        </p>
+                    </li>
+
+                    <li><p:commandButton value="Raporty"
+                                         actionListener="#{dashboardMB.raportyRedirect()}" /></li>
+                    <li><p:commandButton value="Rejestr wypozyczen"
+                                         actionListener="#{dashboardMB.rejestrRedirect()}" /></li>
+                    <li><p:commandButton value="Zarzadzanie kontami"
+                                         actionListener="#{bookBean.saveBook}" /></li>
+                    <li><p:commandButton value="Edycja majatku"
+                                         actionListener="#{dashboardMB.edycjaRedirect()}" /></li>
+                    <li><p:commandButton value="Zgłoszenia"
+                                         actionListener="#{dashboardMB.zgloszeniaRedirect()}" /></li>
+                    <li><p:commandButton value="Audyt"
+                                         actionListener="#{dashboardMB.audytRedirect()}" /></li>
+                    <li class="down"><p:commandButton value="Wyloguj"
+                                                      actionListener="#{loginMB.doLogout()}" /></li>
+                </ul>
+            </h:form>
+        </div>
+
+        <div id="container">
+            Nowe wypożyczenie:
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <h:outputLabel for="menu"/>
+                    <p:selectCheckboxMenu id="menu" value="#{bean.func}" label="Sala:"
+                                          filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                        <f:selectItems value="#{bean.func}" />
+                    </p:selectCheckboxMenu>
+                    <p:commandLink value="Submit" update="display" />
+                </h:panelGrid>
+
+                <p:outputPanel id="display" style="width:250px;padding-left:5px;margin-top:10px">
+                    <p:dataList value="#{bean.func}" var="Przedmioty" emptyMessage="Nie wybrano przedmiotu">
+                        #{bean.func}
+                    </p:dataList>
+
+                    <p:dataTable var="VAR" value="#{bean.func}">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{bean.func}" />
+                        </p:column>
+
+                        <p:column headerText="Os. odpowiedzialna">
+                            <h:outputText value="#{bean.func}" />
+                        </p:column>
+
+                        <p:column headerText="Inf. dodatkowe">
+                            <h:outputText value="#{bean.func}" />
+                        </p:column>
+                    </p:dataTable>
+                    <p class="x">
+                        <p:commandButton value="Wypożycz"
+                                         actionListener="#{bean.func}" /></p>	
+                </p:outputPanel>
+            </h:form>
+
+            Aktualne wypożyczenia:
+            <p:dataTable var="VAR2" value="#{bean.func}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{bean.func}" />
+                </p:column>
+
+                <p:column headerText="Os. odpowiedzialna">
+                    <h:outputText value="#{bean.func}" />
+                </p:column>
+
+                <p:column headerText="Kto wypożyczył?">
+                    <h:outputText value="#{bean.func}" />
+                </p:column>
+            </p:dataTable> 
+        </div>
+
+
+
+        <div id="footer">
+            <div id="footer_text">
+                <p>Copyright &copy; by L4</p>
+            </div>
+        </div>
+
+
+
+    </h:body>
+
+</html>
