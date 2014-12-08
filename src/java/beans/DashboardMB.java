@@ -62,10 +62,28 @@ public class DashboardMB implements Serializable {
         }
     }
 
+    public void _raportyRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../raporty.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
     public void audytRedirect() {
         if (this.loginState.isLoggedIn()) {
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("audyt.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    public void _audytRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../audyt.xhtml");
             } catch (IOException e) {
             }
         }
@@ -98,10 +116,28 @@ public class DashboardMB implements Serializable {
         }
     }
 
+    public void _rejestrRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../rejestr.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
     public void zgloszeniaRedirect() {
         if (this.loginState.isLoggedIn()) {
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("zgloszenia.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    public void _zgloszeniaRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../zgloszenia.xhtml");
             } catch (IOException e) {
             }
         }

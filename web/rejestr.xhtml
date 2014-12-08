@@ -50,41 +50,6 @@
         </div>
 
         <div id="container">
-            Nowe wypożyczenie:
-            <h:form>
-                <h:panelGrid columns="3" cellpadding="5">
-                    <h:outputLabel for="menu"/>
-                    <p:selectCheckboxMenu id="menu" value="#{bean.func}" label="Sala:"
-                                          filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                        <f:selectItems value="#{bean.func}" />
-                    </p:selectCheckboxMenu>
-                    <p:commandLink value="Submit" update="display" />
-                </h:panelGrid>
-
-                <p:outputPanel id="display" style="width:250px;padding-left:5px;margin-top:10px">
-                    <p:dataList value="#{bean.func}" var="Przedmioty" emptyMessage="Nie wybrano przedmiotu">
-                        #{bean.func}
-                    </p:dataList>
-
-                    <p:dataTable var="VAR" value="#{bean.func}">
-                        <p:column headerText="Id">
-                            <h:outputText value="#{bean.func}" />
-                        </p:column>
-
-                        <p:column headerText="Os. odpowiedzialna">
-                            <h:outputText value="#{bean.func}" />
-                        </p:column>
-
-                        <p:column headerText="Inf. dodatkowe">
-                            <h:outputText value="#{bean.func}" />
-                        </p:column>
-                    </p:dataTable>
-                    <p class="x">
-                        <p:commandButton value="Wypożycz"
-                                         actionListener="#{bean.func}" /></p>	
-                </p:outputPanel>
-            </h:form>
-
             Aktualne wypożyczenia:
             <p:dataTable var="VAR2" value="#{bean.func}">
                 <p:column headerText="Id">
@@ -96,6 +61,10 @@
                 </p:column>
 
                 <p:column headerText="Kto wypożyczył?">
+                    <h:outputText value="#{bean.func}" />
+                </p:column>
+
+                <p:column headerText="Zwrot">
                     <h:outputText value="#{bean.func}" />
                 </p:column>
             </p:dataTable> 
