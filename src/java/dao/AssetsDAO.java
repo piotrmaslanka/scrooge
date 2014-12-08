@@ -21,7 +21,7 @@ public interface AssetsDAO {
 
     public void updateAsset(Assets assets);
 
-    public Assets getAssetById(int id);
+    public Assets getAssetById(String id);
 
     public List<Assets> getAssetsByLocation(Location location);
     

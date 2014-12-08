@@ -34,7 +34,7 @@ public class AssetsDAOImpl implements AssetsDAO{
     }
 
     @Override
-    public Assets getAssetById(int id) {
+    public Assets getAssetById(String id) {
        List list = getSessionFactory().getCurrentSession().createQuery("from models.Assets where id=?").setParameter(0,id).list();
        return (Assets)list.get(0);
     }

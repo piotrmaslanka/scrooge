@@ -37,7 +37,7 @@ public class AssetsServiceImpl implements AssetsService{
     }
 
     @Override
-    public Assets getAssetById(int id) {
+    public Assets getAssetById(String id) {
         return getAssetDAO().getAssetById(id);
     }
 
