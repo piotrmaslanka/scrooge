@@ -14,7 +14,10 @@
         <h:form id="form">
             <p:dataList value="#{manageAssetsMB.assets}" var="asset" type="ordered">
                 <f:facet name="header">Środki</f:facet>
-                #{asset.id}: #{asset.description}
+                <h:outputLink id="link#{asset.id}" value="../assets/manage.xhtml">
+                    <f:param name="asset" value="#{asset.id}" />
+                    <h:outputText value="#{asset.id}: #{asset.description}" />
+                </h:outputLink>                          
             </p:dataList>
         </h:form>        
         

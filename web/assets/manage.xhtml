@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Scrooge - Manage Asset</title>
+    </h:head>
+    <h:body>
+        Zarządzanie środkiem
+        <h:form id="form2">
+           <p:growl id="messages"></p:growl>
+           <p:panelGrid columns="2">
+                <p:outputLabel value="Nr ewidencyjny"></p:outputLabel>
+                <p:inputText value="#{manageAssetMB.asset.id}"></p:inputText>  
+                <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
+                <p:selectOneMenu value="#{manageAssetMB.targetUser}">
+                    <f:selectItem itemLabel="Wybierz użytkownika" />
+                    <f:selectItems value="#{manageAssetMB.userChoices}" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Lokalizacja"></p:outputLabel>
+                <p:selectOneMenu value="#{manageAssetMB.targetLocation}">
+                    <f:selectItem itemLabel="Wybierz lokalizację" />
+                    <f:selectItems value="#{manageAssetMB.locationChoices}" />
+                </p:selectOneMenu>                
+            
+                <p:outputLabel value="Data zakupu"></p:outputLabel>
+                <p:calendar value="#{manageAssetMB.asset.purchaseDate}" /> 
+                <p:outputLabel value="Opis"></p:outputLabel>
+                <p:inputText value="#{manageAssetMB.asset.description}"></p:inputText>  
+                <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
+                <p:inputText value="#{manageAssetMB.asset.extraInfo}"></p:inputText>  
+                <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isLendable}" />
+                <p:outputLabel value="Środek materialny?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isMaterial}" />
+                <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isDamaged}" />
+                <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isLost}" />
+            </p:panelGrid>                           
+            <p:commandButton value="Dodaj środek" action="#{manageAssetMB.updateAsset()}" update="messages" ajax="false"></p:commandButton>
+        </h:form>        
+    </h:body>
+</html>
