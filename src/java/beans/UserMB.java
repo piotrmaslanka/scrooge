@@ -71,4 +71,6 @@ public class UserMB implements Serializable{
     }
     
     public void setLoginState(LoginState loginState) { this.loginState = loginState; }
+    
+    
 }
