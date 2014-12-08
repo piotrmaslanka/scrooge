@@ -6,6 +6,7 @@
 package beans;
 
 import components.LoginState;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
@@ -14,10 +15,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import models.Assets;
+import models.Lends;
 import models.Location;
 import models.Users;
 import org.hibernate.exception.SQLGrammarException;
 import service.AssetsService;
+import service.LendsService;
 import service.LocationService;
 import service.UsersService;
 
@@ -27,7 +30,7 @@ import service.UsersService;
  */
 @ManagedBean(name = "manageAssetMB")
 @ViewScoped
-public class manageAssetMB {
+public class ManageAssetMB {
     @ManagedProperty(value="#{loginState}")
     private LoginState loginState;   
 
@@ -43,6 +46,8 @@ public class manageAssetMB {
     @ManagedProperty(value="#{usersServiceImpl}")
     private UsersService usersService;
     
+    @ManagedProperty(value="#{lendsServiceImpl}")
+    private LendsService lendsService;
     
     public void setAssetsService(AssetsService assetsService) { this.assetsService = assetsService; }
     public AssetsService getAssetsService() { return this.assetsService; }
@@ -50,6 +55,8 @@ public class manageAssetMB {
     public LocationService getLocationService() { return this.locationService; }    
     public void setUsersService(UsersService usersService) { this.usersService = usersService; }
     public UsersService getUsersService() { return this.usersService; }      
+    public void setLendsService(LendsService lendsService) { this.lendsService = lendsService; }
+    public LendsService getLendsService() { return this.lendsService; }      
     
     private Assets asset;
     public void setAsset(Assets asset) { this.asset = asset; }
@@ -103,6 +110,29 @@ public class manageAssetMB {
         usermap.put("Nikt", null);
         return usermap;
     }    
+    
+    private Lends lend = new Lends();
+    public void setLend(Lends lend) { this.lend = lend; }
+    public Lends getLend() { return this.lend; }
+    
+    
+    public boolean getCanRent() {
+        if (!this.getAsset().isIsLendable()) return false;
+        boolean canRent = true;
+        Date currentDate = new Date();
+        for (Lends lend : this.getAsset().getLendses())
+            if (lend.getLendTo().after(currentDate))
+                canRent = false;
+        return canRent;
+    }
+    
+    public void lendAsset() {
+        this.lend.setAssets(this.asset);
+        this.lend.setUsers(this.loginState.getUser());
+        this.lendsService.addLend(this.lend);
+        FacesContext.getCurrentInstance().addMessage(null, 
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Wypożyczono", "Wypożyczono środek"));
+    }
     
     public void updateAsset() {
         try {

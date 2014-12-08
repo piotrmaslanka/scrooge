@@ -36,7 +36,7 @@
         <comment>Czy jest to administrator</comment>
       </column>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="lendses" table="lends">
+    <set fetch="select" inverse="true" lazy="false" name="lendses" table="lends">
       <key>
         <column length="256" name="who_lended" not-null="true">
           <comment>Kto wypo¿yczy³</comment>
@@ -44,7 +44,7 @@
       </key>
       <one-to-many class="models.Lends"/>
     </set>
-    <set fetch="select" inverse="true" lazy="true" name="assetses" table="assets">
+    <set fetch="select" inverse="true" lazy="false" name="assetses" table="assets">
       <key>
         <column length="256" name="responsibler">
           <comment>Uzytkownik odpowiedzialny za rodek</comment>
@@ -52,7 +52,7 @@
       </key>
       <one-to-many class="models.Assets"/>
     </set>
-    <set fetch="select" inverse="true" lazy="true" name="assetNoteses" table="asset_notes">
+    <set fetch="select" inverse="true" lazy="false" name="assetNoteses" table="asset_notes">
       <key>
         <column length="256" name="who_reported">
           <comment>Kto zg³osi³</comment>

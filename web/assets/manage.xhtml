@@ -88,7 +88,6 @@
                         <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isLost}" />
                     </p:panelGrid>                           
                     <p:commandButton value="Edytuj" action="#{manageAssetMB.updateAsset()}" update="messages" ajax="false"></p:commandButton>
-                    <p:commandButton value="Wypożycz" action="#{manageAssetMB.lendAsset()}" update="messages" ajax="false"></p:commandButton>
                 </h:form>        
             </div>
 
@@ -109,6 +108,20 @@
                         </p:panelGrid>
                     </p:dataList>
                 </h:form>      
+                              
+                <h:form id="form3" rendered="#{manageAssetMB.canRent}">
+                    <p:panelGrid columns="2">            
+                        <p:outputLabel value="Od"></p:outputLabel>
+                        <p:calendar value="#{manageAssetMB.lend.lendFrom}" />                             
+                        <p:outputLabel value="Do"></p:outputLabel>
+                        <p:calendar value="#{manageAssetMB.lend.lendTo}" />                             
+                        <p:outputLabel value="Cel"></p:outputLabel>
+                        <p:inputText value="#{manageAssetMB.lend.purpose}"></p:inputText>  
+                        <p:outputLabel value="Dodatkowe dane"></p:outputLabel>
+                        <p:inputText value="#{manageAssetMB.lend.extraInfo}"></p:inputText>  
+                        <p:commandButton value="Wypożycz" action="#{manageAssetMB.lendAsset()}" update="messages" ajax="false"></p:commandButton>
+                    </p:panelGrid>
+                </h:form>                     
 
             </div>
 
