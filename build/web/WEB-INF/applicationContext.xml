@@ -80,7 +80,7 @@
         <property name = "assetNotesDAO" ref = "assetNotesDaoImpl"/>
     </bean>
     
-    <bean id = "assetServiceImpl" class = "service.AssetsServiceImpl">
+    <bean id = "assetsServiceImpl" class = "service.AssetsServiceImpl">
         <property name = "assetDAO" ref = "assetsDaoImpl"/>
     </bean>
     

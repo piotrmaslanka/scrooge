@@ -118,6 +118,6 @@ public class manageAssetMB {
         
         this.assetsService.updateAsset(this.asset);
         FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Zmodyfikowano", "Zmieniono środek"));          
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Zmodyfikowano", "Zmieniono środek"));
     }
 }

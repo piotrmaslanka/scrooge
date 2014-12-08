@@ -80,6 +80,15 @@ public class DashboardMB implements Serializable {
         }
     }
 
+    public void _edycjaRedirect() {
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../edycja.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
+
     public void rejestrRedirect() {
         if (this.loginState.isLoggedIn()) {
             try {
