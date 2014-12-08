@@ -42,5 +42,20 @@
             </p:panelGrid>                           
             <p:commandButton value="Dodaj środek" action="#{manageAssetMB.updateAsset()}" update="messages" ajax="false"></p:commandButton>
         </h:form>        
+        
+        Wypożyczenia:
+        <h:form id="form">
+            <p:dataList value="#{manageAssetMB.asset.lendses}" var="lend" type="ordered">
+             <p:panelGrid columns="3">                
+                <f:facet name="header">Kto</f:facet>
+                <f:facet name="header">Od</f:facet>
+                <f:facet name="header">Do</f:facet>
+                
+                <p:outputLabel value="#{lend.users.name} #{lend.users.surname}"></p:outputLabel>
+                <p:outputLabel value="#{lend.lendFrom}"></p:outputLabel>
+                <p:outputLabel value="#{lend.lendTo}"></p:outputLabel>
+             </p:panelGrid>
+            </p:dataList>
+        </h:form>        
     </h:body>
 </html>
