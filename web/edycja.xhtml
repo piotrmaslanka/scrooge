@@ -50,163 +50,30 @@
         </div>
 
         <div id="container">
-            <h:form>
-                <p:tabView>
-                    <p:tab title="Dodaj">
-                        <div id="lewy">
-                            <table>
-                                <tr>
-                                    <td><p>Id:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Lokacja:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Osoba odpowiedzialna:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Data zakupu:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Opis:</p></td>
-                                    <td><p:inputTextarea rows="4" cols="33" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Informacje dodatkowe:</p></td>
-                                    <td><p:inputTextarea rows="4" cols="33" /></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="prawy">
-                            <table>
-                                <tr><p>Informacje dodatkowe</p></tr>
-                                <tr>
-                                    <td><p>Srodek materialny:</p></td>
-                                    <td><p:selectBooleanButton id="value1" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Wypozyczony:</p></td>
-                                    <td><p:selectBooleanButton id="value2" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Uszkodzony:</p></td>
-                                    <td><p:selectBooleanButton id="value3" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Zgubiony:</p></td>
-                                    <td><p:selectBooleanButton id="value4" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Skradziony:</p></td>
-                                    <td><p:selectBooleanButton id="value5" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>				
-                            </table>
-                            <p class="x">
-                                <p:commandButton value="Akceptuj"
-                                                 actionListener="#{bookBean.saveBook}" /></p>
-
-                        </div>
-                    </p:tab>
-                    <p:tab title="Usun">
-                        <div id="lewy">
-                            <table>
-                                <tr>
-                                    <td><p>Id:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
-                                </tr>
-
-
-                            </table>
-                            <table>
-                                <tr><td><p>Lista właściwości składnika majatku</p></td></tr>
-                                <tr>
-                                    <td><p:panelGrid columns="3" layout="grid">           
-                                            <h:outputText value="" />
-                                            <h:outputText value="" />
-                                            <h:outputText value="" />
-
-                                            <h:outputText value="" />
-                                            <h:outputText value="" />
-                                            <h:outputText value="" />
-
-                                            <h:outputText value="" />
-                                            <h:outputText value="" />
-                                            <h:outputText value="" />
-                                        </p:panelGrid></td></tr></table>
-                        </div>
-                        <div id="prawy">
-                            <p class="x">
-                                <p:commandButton value="Akceptuj"
-                                                 actionListener="#{bookBean.saveBook}" /></p>
-
-                        </div>
-                    </p:tab>
-
-                    <p:tab title="Edytuj">
-                        <div id="lewy">
-                            <table>
-                                <tr>
-                                    <td><p>Id:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Lokacja:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Osoba odpowiedzialna:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Data zakupu:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Opis:</p></td>
-                                    <td><p:inputTextarea rows="4" cols="33" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Informacje dodatkowe:</p></td>
-                                    <td><p:inputTextarea rows="4" cols="33" /></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="prawy">
-                            <table>
-                                <tr><p>Informacje dodatkowe</p></tr>
-                                <tr>
-                                    <td><p>Srodek materialny:</p></td>
-                                    <td><p:selectBooleanButton id="value21" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Wypozyczony:</p></td>
-                                    <td><p:selectBooleanButton id="value22" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Uszkodzony:</p></td>
-                                    <td><p:selectBooleanButton id="value23" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Zgubiony:</p></td>
-                                    <td><p:selectBooleanButton id="value24" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Skradziony:</p></td>
-                                    <td><p:selectBooleanButton id="value25" value="null" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" /></td>
-                                </tr>				
-                            </table>
-                            <p class="x">
-                                <p:commandButton value="Akceptuj"
-                                                 actionListener="#{bookBean.saveBook}" /></p>
-
-                        </div>
-                    </p:tab>
-                </p:tabView>
+            <h:form id="form">
+                <p:dataTable value="#{manageLocationsMB.allLocations}" var="location" type="ordered">
+                    <f:facet name="header">Lokacje</f:facet>
+                    <p:column headerText="Sala">
+                        <h:outputText value="#{location.id}" />
+                    </p:column>   
+                    <p:column headerText="Przedmioty">
+                        <h:outputLink id="link#{location.id}" value="locations/manage.xhtml">
+                            <f:param name="location" value="#{location.id}" />
+                            <h:outputText value="Wybierz" />
+                        </h:outputLink>  
+                    </p:column> 
+                </p:dataTable>
             </h:form>
+            <div style="margin-bottom: 20px;">
+                <h:form id="form2">
+                    <p:growl id="messages"></p:growl>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nazwa nowej sali"></p:outputLabel>
+                        <p:inputText value="#{manageLocationsMB.location.id}"></p:inputText>  
+                    </p:panelGrid>                           
+                    <p:commandButton value="Dodaj salę" action="#{manageLocationsMB.addLocation}" update="messages" ajax="false"></p:commandButton>
+                </h:form>
+            </div>
         </div>
 
 
@@ -216,7 +83,6 @@
                 <p>Copyright &copy; by L4</p>
             </div>
         </div>
-
 
 
     </h:body>

@@ -1,54 +1,122 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
     <h:head>
-        <title>Scrooge - Manage Location</title>
+        <link rel="stylesheet" type="text/css" href="../style.css" />
     </h:head>
     <h:body>
-        Sala nazywa się <h:outputText value="#{manageAssetsMB.location.id}" />.
-  
-        Lista sprzętów:
-        <h:form id="form">
-            <p:dataList value="#{manageAssetsMB.assets}" var="asset" type="ordered">
-                <f:facet name="header">Środki</f:facet>
-                <h:outputLink id="link#{asset.id}" value="../assets/manage.xhtml">
-                    <f:param name="asset" value="#{asset.id}" />
-                    <h:outputText value="#{asset.id}: #{asset.description}" />
-                </h:outputLink>                          
-            </p:dataList>
-        </h:form>        
-        
-        Dodaj środek:
-        <h:form id="form2">
-           <p:growl id="messages"></p:growl>
-           <p:panelGrid columns="2">
-                <p:outputLabel value="Nr ewidencyjny"></p:outputLabel>
-                <p:inputText value="#{manageAssetsMB.asset.id}"></p:inputText>  
-                <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
-                <p:selectOneMenu value="#{manageAssetsMB.targetUser}">
-                    <f:selectItem itemLabel="Wybierz użytkownika" />
-                    <f:selectItems value="#{manageAssetsMB.userChoices}" />
-                </p:selectOneMenu>
-                
-                <p:outputLabel value="Data zakupu"></p:outputLabel>
-                <p:calendar value="#{manageAssetsMB.asset.purchaseDate}" /> 
-                <p:outputLabel value="Opis"></p:outputLabel>
-                <p:inputText value="#{manageAssetsMB.asset.description}"></p:inputText>  
-                <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
-                <p:inputText value="#{manageAssetsMB.asset.extraInfo}"></p:inputText>  
-                <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLendable}" />
-                <p:outputLabel value="Środek materialny?"></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isMaterial}" />
-                <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isDamaged}" />
-                <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
-                <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLost}" />
-            </p:panelGrid>                           
-            <p:commandButton value="Dodaj środek" action="#{manageAssetsMB.addAsset()}" update="messages" ajax="false"></p:commandButton>
-        </h:form>        
+        <div id="header">
+            <div id="logo">
+                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+            </div>
+            <div id="text">
+                <p>System ewidencji majatku</p>
+            </div>
+
+        </div>
+
+        <div id="menu">
+            <h:form>
+                <ul>
+                    <li>
+                        <p>
+                            Zalogowany jako: <p:outputLabel value="#{dashboardMB.loginState.user.login}"></p:outputLabel><br></br>
+                            Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
+                        </p>
+                    </li>
+
+                    <li><p:commandButton value="Raporty"
+                                         actionListener="#{dashboardMB._raportyRedirect()}" /></li>
+                    <li><p:commandButton value="Rejestr wypozyczen"
+                                         actionListener="#{dashboardMB._rejestrRedirect()}" /></li>
+                    <li><p:commandButton value="Zarzadzanie kontami"
+                                         actionListener="#{bookBean.saveBook}" /></li>
+                    <li><p:commandButton value="Edycja majatku"
+                                         actionListener="#{dashboardMB._edycjaRedirect()}" /></li>
+                    <li><p:commandButton value="Zgłoszenia"
+                                         actionListener="#{dashboardMB._zgloszeniaRedirect()}" /></li>
+                    <li><p:commandButton value="Audyt"
+                                         actionListener="#{dashboardMB._audytRedirect()}" /></li>
+                    <li class="down"><p:commandButton value="Wyloguj"
+                                                      actionListener="#{loginMB.doLogout()}" /></li>
+                </ul>
+            </h:form>
+        </div>
+
+        <div id="container">
+            <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+                Id sali: <h:outputText value="#{manageAssetsMB.location.id}" /><br></br>
+                <p:commandButton value="Wróc do listy sal" actionListener="#{dashboardMB._edycjaRedirect()}" />
+            </div>
+            <div id="lewy">
+                <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+                    Lista przedmiotów:
+                </div>
+
+                <h:form id="form">
+                    <p:dataTable value="#{manageAssetsMB.assets}" var="asset" type="ordered">
+                        <f:facet name="header">Środki</f:facet>
+                        <p:column headerText="Id">
+                            <h:outputText value="#{asset.id}" />
+                        </p:column>
+                        <p:column headerText="Przedmiot">
+                            <h:outputLink id="link#{asset.id}" value="../assets/manage.xhtml">
+                                <f:param name="asset" value="#{asset.id}" />
+                                <h:outputText value="#{asset.description}" />
+                            </h:outputLink>  
+                        </p:column>
+                    </p:dataTable>
+                </h:form>     
+            </div>
+
+            <div id="prawy">
+                <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+                    Dodaj środek:
+                </div>
+                <h:form id="form2">
+                    <p:growl id="messages"></p:growl>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nr ewidencyjny"></p:outputLabel>
+                        <p:inputText value="#{manageAssetsMB.asset.id}"></p:inputText>  
+                        <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
+                        <p:selectOneMenu value="#{manageAssetsMB.targetUser}">
+                            <f:selectItem itemLabel="Wybierz użytkownika" />
+                            <f:selectItems value="#{manageAssetsMB.userChoices}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Data zakupu"></p:outputLabel>
+                        <p:calendar value="#{manageAssetsMB.asset.purchaseDate}" /> 
+                        <p:outputLabel value="Opis"></p:outputLabel>
+                        <p:inputText value="#{manageAssetsMB.asset.description}"></p:inputText>  
+                        <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
+                        <p:inputText value="#{manageAssetsMB.asset.extraInfo}"></p:inputText>  
+                        <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
+                        <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLendable}" />
+                        <p:outputLabel value="Środek materialny?"></p:outputLabel>
+                        <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isMaterial}" />
+                        <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
+                        <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isDamaged}" />
+                        <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
+                        <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLost}" />
+                    </p:panelGrid>                           
+                    <p:commandButton value="Dodaj środek" action="#{manageAssetsMB.addAsset()}" update="messages" ajax="false"></p:commandButton>
+                </h:form>  
+            </div>
+        </div>
+
+
+        <div id="footer">
+            <div id="footer_text">
+                <p>Copyright &copy; by L4</p>
+            </div>
+        </div>
+
     </h:body>
+
 </html>
