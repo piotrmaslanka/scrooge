@@ -59,7 +59,7 @@ public class manageAssetMB {
             this.asset = this.assetsService.getAssetById(params.get("asset"));
         }
         if (params.get("asset") != null)
-            if (params.get("asset") != this.asset.getId())
+            if (!params.get("asset").equals(this.asset.getId()))
                 this.asset = this.assetsService.getAssetById(params.get("asset"));
    
         return this.asset;    

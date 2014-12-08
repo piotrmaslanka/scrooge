@@ -58,7 +58,7 @@ public class ManageAssetsMB implements Serializable {
             this.location = this.locationService.getLocationById(params.get("location"));
         }
         if (params.get("location") != null)
-            if (params.get("location") != this.location.getId())
+            if (!params.get("location").equals(this.location.getId()))
                 this.location = this.locationService.getLocationById(params.get("location"));
    
         return this.location;
