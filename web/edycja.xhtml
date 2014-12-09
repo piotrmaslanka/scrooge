@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
         <link rel="stylesheet" type="text/css" href="style.css" />
@@ -27,6 +28,9 @@
                     <li>
                         <p>
                             Zalogowany jako: <p:outputLabel value="#{dashboardMB.loginState.user.login}"></p:outputLabel><br></br>
+                            Prawa dostępu  : 
+                            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Administrator</c:if>
+                            <c:if test="#{dashboardMB.loginState.user.isAdmin == false}">Użytkownik</c:if><br></br>
                             Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
                         </p>
                     </li>
@@ -57,7 +61,7 @@
                         <h:outputText value="#{location.id}" />
                     </p:column>   
                     <p:column headerText="Przedmioty">
-                        <h:outputLink id="link#{location.id}" value="locations/manage.xhtml">
+                        <h:outputLink id="link#{location.id}" value="locationsmanage.xhtml">
                             <f:param name="location" value="#{location.id}" />
                             <h:outputText value="Wybierz" />
                         </h:outputLink>  

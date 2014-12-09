@@ -5,10 +5,11 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
-        <link rel="stylesheet" type="text/css" href="../style.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
     </h:head>
     <h:body>
         <div id="header">
@@ -27,22 +28,25 @@
                     <li>
                         <p>
                             Zalogowany jako: <p:outputLabel value="#{dashboardMB.loginState.user.login}"></p:outputLabel><br></br>
+                            Prawa dostępu  : 
+                            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Administrator</c:if>
+                            <c:if test="#{dashboardMB.loginState.user.isAdmin == false}">Użytkownik</c:if><br></br>
                             Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
                         </p>
                     </li>
 
                     <li><p:commandButton value="Raporty"
-                                         actionListener="#{dashboardMB._raportyRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.raportyRedirect()}" /></li>
                     <li><p:commandButton value="Rejestr wypozyczen"
-                                         actionListener="#{dashboardMB._rejestrRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.rejestrRedirect()}" /></li>
                     <li><p:commandButton value="Zarzadzanie kontami"
                                          actionListener="#{bookBean.saveBook}" /></li>
                     <li><p:commandButton value="Edycja majatku"
-                                         actionListener="#{dashboardMB._edycjaRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.edycjaRedirect()}" /></li>
                     <li><p:commandButton value="Zgłoszenia"
-                                         actionListener="#{dashboardMB._zgloszeniaRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.zgloszeniaRedirect()}" /></li>
                     <li><p:commandButton value="Audyt"
-                                         actionListener="#{dashboardMB._audytRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.audytRedirect()}" /></li>
                     <li class="down"><p:commandButton value="Wyloguj"
                                                       actionListener="#{loginMB.doLogout()}" /></li>
                 </ul>
@@ -52,7 +56,7 @@
         <div id="container">
             <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
                 Id sali: <h:outputText value="#{manageAssetsMB.location.id}" /><br></br>
-                <p:commandButton value="Wróc do listy sal" actionListener="#{dashboardMB._edycjaRedirect()}" />
+                <p:commandButton value="Wróc do listy sal" actionListener="#{dashboardMB.edycjaRedirect()}" />
             </div>
             <div id="lewy">
                 <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
@@ -66,7 +70,7 @@
                             <h:outputText value="#{asset.id}" />
                         </p:column>
                         <p:column headerText="Przedmiot">
-                            <h:outputLink id="link#{asset.id}" value="../assets/manage.xhtml">
+                            <h:outputLink id="link#{asset.id}" value="assetsmanage.xhtml">
                                 <f:param name="asset" value="#{asset.id}" />
                                 <h:outputText value="#{asset.description}" />
                             </h:outputLink>  

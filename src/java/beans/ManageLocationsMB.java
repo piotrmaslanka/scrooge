@@ -47,7 +47,7 @@ public class ManageLocationsMB implements Serializable {
     public List<Location> getAllLocations() {
         if (!this.loginState.isAdmin())
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {}
  
         return this.locationService.getAllLocations();
@@ -61,7 +61,7 @@ public class ManageLocationsMB implements Serializable {
     public void addLocation() {
         if (!this.loginState.isAdmin())
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {}
         this.locationService.addLocation(this.location);
         FacesContext.getCurrentInstance().addMessage(null, 
