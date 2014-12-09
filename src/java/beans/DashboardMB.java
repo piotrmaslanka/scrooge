@@ -62,7 +62,7 @@ public class DashboardMB implements Serializable {
                     } catch (IOException e) {
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("raporty.xhtml");
                 }
             } catch (IOException e) {
             }
@@ -83,7 +83,7 @@ public class DashboardMB implements Serializable {
                     } catch (IOException e) {
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("audyt.xhtml");
                 }
             } catch (IOException e) {
             }
@@ -104,7 +104,7 @@ public class DashboardMB implements Serializable {
                     } catch (IOException e) {
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("denied.xhtml");
                 }
             } catch (IOException e) {
             }
@@ -125,7 +125,7 @@ public class DashboardMB implements Serializable {
                     } catch (IOException e) {
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("denied.xhtml");
                 }
             } catch (IOException e) {
             }
@@ -146,7 +146,7 @@ public class DashboardMB implements Serializable {
                     } catch (IOException e) {
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("zgloszenia.xhtml");
                 }
             } catch (IOException e) {
             }
