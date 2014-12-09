@@ -44,6 +44,12 @@ public class AssetNotesDAOImpl implements AssetNotesDAO{
         return list;
     }
 
+    @Override
+    public List<AssetNotes> getSolvedAssetNotes() {
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.AssetNotes where isSolved=true").list();
+        return list;
+    }    
+    
     /**
      * @return the SessionFactory
      */

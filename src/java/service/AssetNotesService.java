@@ -19,7 +19,6 @@ public interface AssetNotesService {
     public List<AssetNotes> getAllAssetNotes();
 
     public List<AssetNotes> getUnsolvedAssetNotes();
-
-
+    public List<AssetNotes> getSolvedAssetNotes();
 }
 

@@ -8,12 +8,12 @@
       <column name="id"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="models.Assets" fetch="select" name="assets">
+    <many-to-one class="models.Assets" fetch="select" name="assets" lazy="false">
       <column length="30" name="id_asset">
         <comment>ID rodka</comment>
       </column>
     </many-to-one>
-    <many-to-one class="models.Users" fetch="select" name="users">
+    <many-to-one class="models.Users" fetch="select" name="users" lazy="false">
       <column length="256" name="who_reported">
         <comment>Kto zg³osi³</comment>
       </column>

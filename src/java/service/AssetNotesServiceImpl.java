@@ -45,6 +45,12 @@ public class AssetNotesServiceImpl implements AssetNotesService{
         return getAssetNotesDAO().getUnsolvedAssetNotes();
     }
     
+    @Override
+    public List<AssetNotes> getSolvedAssetNotes() {
+        return getAssetNotesDAO().getSolvedAssetNotes();    
+    }
+    
+    
     /**
      * @return the assetNotesDAO
      */

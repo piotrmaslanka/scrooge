@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Scrooge - Analyze Note</title>
+    </h:head>
+    <h:body>
+        
+        <h:form id="form">
+           <p:growl id="messages"></p:growl>
+           <p:panelGrid columns="2">
+               <p:outputLabel value="Zgłaszający" />
+               <h:inputText value="#{manageAssetNoteMB.assetNote.users.name} #{manageAssetNoteMB.assetNote.users.surname}" readonly="true"/>
+               <p:outputLabel value="Powód" />
+               <h:inputText value="#{manageAssetNoteMB.assetNote.reason}" readonly="true"/>
+               <p:outputLabel value="Czy zagubiony (wg noty)" />
+               <h:outputText value="#{manageAssetNoteMB.assetNote.isLost}" />
+               <p:outputLabel value="Czy uszkodzony (wg noty)" />
+               <h:outputText value="#{manageAssetNoteMB.assetNote.isDamaged}" />
+               
+                <p:outputLabel value="ID śodka" />
+                <h:inputText value="#{manageAssetNoteMB.assetNote.assets.id}" readonly="true"/>
+                <p:outputLabel value="Opis środka"></p:outputLabel>
+                <p:inputText value="#{manageAssetNoteMB.assetNote.assets.description}"></p:inputText>  
+                <p:outputLabel value="Inf. dodatkowe"></p:outputLabel>
+                <p:inputText value="#{manageAssetNoteMB.assetNote.assets.extraInfo}"></p:inputText>  
+                <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetNoteMB.assetNote.assets.isLendable}" />
+                <p:outputLabel value="Środek materialny?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetNoteMB.assetNote.assets.isMaterial}" />
+                <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetNoteMB.assetNote.assets.isDamaged}" />
+                <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
+                <p:selectBooleanCheckbox value="#{manageAssetNoteMB.assetNote.assets.isLost}" />                
+            </p:panelGrid>                           
+            <p:commandButton value="Obsłuż i zapisz" action="#{manageAssetNoteMB.updateStuff}" update="messages"></p:commandButton>
+        </h:form>
+    </h:body>
+</html>

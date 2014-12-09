@@ -50,51 +50,47 @@
         </div>
 
         <div id="container">
-            <h:form>
+            <h:form id="forma">                
                 <p:tabView>
                     <p:tab title="Aktualne">
-                        <p:dataTable var="VAR" value="#{bean.func}">
-                            <p:column headerText="Id">
-                                <h:outputText value="#{bean.func}" />
-                            </p:column>
-
-                            <p:column headerText="Os. odpowiedzialna">
-                                <h:outputText value="#{bean.func}" />
+                          <p:dataTable var="var" value="#{manageAssetNotesMB.unsolvedAssetNotes}" id="currents">
+                            <p:column headerText="Przedmiot">                                
+                                <h:outputLink id="link#{location.id}" value="analyzeNote.xhtml">
+                                    <f:param name="an" value="#{var.id}" />
+                                    <h:outputText value="#{var.assets.id}" />
+                                </h:outputLink>                                    
                             </p:column>
 
                             <p:column headerText="Problem">
-                                <h:outputText value="#{bean.func}" />
+                                <h:outputText value="#{var.reason}" />
                             </p:column>
 
                             <p:column headerText="Zgłosił:">
-                                <h:outputText value="#{bean.func}" />
+                                <h:outputText value="#{var.users.name} #{var.users.surname}" />
                             </p:column>
 
-                            <p:column headerText="Załatwione:">
-                                <h:outputText value="#{bean.func}" />
+                            <p:column headerText="Data zgłoszenia:">
+                                <h:outputText value="#{var.whenCreated}" />
                             </p:column>
-                        </p:dataTable> 
+                          </p:dataTable>
+
                     </p:tab>
                     <p:tab title="Nieaktualne">
-                        <p:dataTable var="VAR" value="#{bean.func}">
-                            <p:column headerText="Id">
-                                <h:outputText value="#{bean.func}" />
-                            </p:column>
-
-                            <p:column headerText="Os. odpowiedzialna">
-                                <h:outputText value="#{bean.func}" />
+                        <p:dataTable var="var" value="#{manageAssetNotesMB.solvedAssetNotes}">
+                            <p:column headerText="Przedmiot">
+                                <h:outputText value="#{var.assets.id}" />
                             </p:column>
 
                             <p:column headerText="Problem">
-                                <h:outputText value="#{bean.func}" />
+                                <h:outputText value="#{var.reason}" />
                             </p:column>
 
                             <p:column headerText="Zgłosił:">
-                                <h:outputText value="#{bean.func}" />
+                                <h:outputText value="#{var.users.name} #{var.users.surname}" />
                             </p:column>
 
-                            <p:column headerText="Data rozwiązania:">
-                                <h:outputText value="#{bean.func}" />
+                            <p:column headerText="Data zgłoszenia:">
+                                <h:outputText value="#{var.whenCreated}" />
                             </p:column>
                         </p:dataTable> 
                     </p:tab>
@@ -104,17 +100,25 @@
                             <table>
                                 <tr>
                                     <td><p>Id:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                    <td><p:inputText value="#{manageAssetNotesMB.targetAssetID}" /></td>
                                 </tr>
                                 <tr>
                                     <td><p>Problem:</p></td>
-                                    <td><p:inputText value="#{bean.propertyName}" /></td>
+                                    <td><p:inputText value="#{manageAssetNotesMB.assetNote.reason}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Uszkodzony?</p></td>
+                                    <td><p><p:selectBooleanCheckbox value="#{manageAssetNotesMB.assetNote.isDamaged}" /></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Zagubiony?</p></td>
+                                    <td><p><p:selectBooleanCheckbox value="#{manageAssetNotesMB.assetNote.isLost}" /></p></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <p class="x">
-                                            <p:commandButton value="Zgłoś"
-                                                             actionListener="#{bean.func}" />
+                                            <p:growl id="messages"></p:growl>
+                                            <p:commandButton value="Zgłoś" update="messages currents" action="#{manageAssetNotesMB.reportNote()}" />
                                         </p>
                                     </td>
                                 </tr>
