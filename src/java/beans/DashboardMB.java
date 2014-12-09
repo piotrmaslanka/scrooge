@@ -50,7 +50,7 @@ public class DashboardMB implements Serializable {
             } catch (IOException e) {
             }
         }
-        return this.assetNotesService.getAllAssetNotes().size();
+        return this.assetNotesService.getUnsolvedAssetNotes().size();
     }
 
     public void raportyRedirect() {
