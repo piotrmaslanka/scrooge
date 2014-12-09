@@ -6,12 +6,12 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Scrooge - Manage Asset</title>
-        <link rel="stylesheet" type="text/css" href="../style.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
     </h:head>
     <h:body>
         <div id="header">
             <div id="logo">
-                <a href="index.xhtml" title="Strona glowna"><img src="../LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
             </div>
             <div id="text">
                 <p>System ewidencji majatku</p>
@@ -30,17 +30,17 @@
                     </li>
 
                     <li><p:commandButton value="Raporty"
-                                         actionListener="#{dashboardMB._raportyRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.raportyRedirect()}" /></li>
                     <li><p:commandButton value="Rejestr wypozyczen"
-                                         actionListener="#{dashboardMB._rejestrRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.rejestrRedirect()}" /></li>
                     <li><p:commandButton value="Zarzadzanie kontami"
                                          actionListener="#{bookBean.saveBook}" /></li>
                     <li><p:commandButton value="Edycja majatku"
-                                         actionListener="#{dashboardMB._edycjaRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.edycjaRedirect()}" /></li>
                     <li><p:commandButton value="Zgłoszenia"
-                                         actionListener="#{dashboardMB._zgloszeniaRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.zgloszeniaRedirect()}" /></li>
                     <li><p:commandButton value="Audyt"
-                                         actionListener="#{dashboardMB._audytRedirect()}" /></li>
+                                         actionListener="#{dashboardMB.audytRedirect()}" /></li>
                     <li class="down"><p:commandButton value="Wyloguj"
                                                       actionListener="#{loginMB.doLogout()}" /></li>
                 </ul>
@@ -49,8 +49,8 @@
 
         <div id="container">
             <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
-                Id przedmiotu: <h:outputText value="#{manageAssetsMB.asset.id}" /><br></br>
-                <p:commandButton value="Powrót" actionListener="#{dashboardMB._edycjaRedirect()}" />
+                Id przedmiotu: <h:outputText value="#{manageAssetMB.asset.id}" /><br></br>
+                <p:commandButton value="Powrót" actionListener="#{dashboardMB.edycjaRedirect()}" />
             </div>
             <div id="lewy">
                 <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
@@ -93,7 +93,7 @@
 
             <div id="prawy">
                 <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
-                    Aktualne wypożyczenia
+                    Wypożyczenia
                 </div>
                 <h:form id="form">
                     <p:dataList value="#{manageAssetMB.asset.lendses}" var="lend" type="ordered">
@@ -108,20 +108,25 @@
                         </p:panelGrid>
                     </p:dataList>
                 </h:form>      
-                              
-                <h:form id="form3" rendered="#{manageAssetMB.canRent}">
-                    <p:panelGrid columns="2">            
-                        <p:outputLabel value="Od"></p:outputLabel>
-                        <p:calendar value="#{manageAssetMB.lend.lendFrom}" />                             
-                        <p:outputLabel value="Do"></p:outputLabel>
-                        <p:calendar value="#{manageAssetMB.lend.lendTo}" />                             
-                        <p:outputLabel value="Cel"></p:outputLabel>
-                        <p:inputText value="#{manageAssetMB.lend.purpose}"></p:inputText>  
-                        <p:outputLabel value="Dodatkowe dane"></p:outputLabel>
-                        <p:inputText value="#{manageAssetMB.lend.extraInfo}"></p:inputText>  
-                        <p:commandButton value="Wypożycz" action="#{manageAssetMB.lendAsset()}" update="messages" ajax="false"></p:commandButton>
-                    </p:panelGrid>
-                </h:form>                     
+
+                <div style="margin-bottom: 20px; margin-top: 20px;">
+                    <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+                        Wypożycz
+                    </div>
+                    <h:form id="form3" rendered="#{manageAssetMB.canRent}">
+                        <p:panelGrid columns="2">            
+                            <p:outputLabel value="Od"></p:outputLabel>
+                            <p:calendar value="#{manageAssetMB.lend.lendFrom}" />                             
+                            <p:outputLabel value="Do"></p:outputLabel>
+                            <p:calendar value="#{manageAssetMB.lend.lendTo}" />                             
+                            <p:outputLabel value="Cel"></p:outputLabel>
+                            <p:inputText value="#{manageAssetMB.lend.purpose}"></p:inputText>  
+                            <p:outputLabel value="Dodatkowe dane"></p:outputLabel>
+                            <p:inputText value="#{manageAssetMB.lend.extraInfo}"></p:inputText>  
+                            <p:commandButton value="Wypożycz" action="#{manageAssetMB.lendAsset()}" update="messages" ajax="false"></p:commandButton>
+                        </p:panelGrid>
+                    </h:form>    
+                </div>
 
             </div>
 

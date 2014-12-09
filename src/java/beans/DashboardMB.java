@@ -56,16 +56,19 @@ public class DashboardMB implements Serializable {
     public void raportyRedirect() {
         if (this.loginState.isLoggedIn()) {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("raporty.xhtml");
+                if (this.loginState.isAdmin()) {
+                    try {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("raporty.xhtml");
+                    } catch (IOException e) {
+                    }
+                } else {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                }
             } catch (IOException e) {
             }
-        }
-    }
-
-    public void _raportyRedirect() {
-        if (this.loginState.isLoggedIn()) {
+        } else {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../raporty.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {
             }
         }
@@ -74,16 +77,19 @@ public class DashboardMB implements Serializable {
     public void audytRedirect() {
         if (this.loginState.isLoggedIn()) {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("audyt.xhtml");
+                if (this.loginState.isAdmin()) {
+                    try {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("audyt.xhtml");
+                    } catch (IOException e) {
+                    }
+                } else {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                }
             } catch (IOException e) {
             }
-        }
-    }
-
-    public void _audytRedirect() {
-        if (this.loginState.isLoggedIn()) {
+        } else {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../audyt.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {
             }
         }
@@ -92,16 +98,19 @@ public class DashboardMB implements Serializable {
     public void edycjaRedirect() {
         if (this.loginState.isLoggedIn()) {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("edycja.xhtml");
+                if (this.loginState.isAdmin()) {
+                    try {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("edycja.xhtml");
+                    } catch (IOException e) {
+                    }
+                } else {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                }
             } catch (IOException e) {
             }
-        }
-    }
-
-    public void _edycjaRedirect() {
-        if (this.loginState.isLoggedIn()) {
+        } else {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../edycja.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {
             }
         }
@@ -110,16 +119,19 @@ public class DashboardMB implements Serializable {
     public void rejestrRedirect() {
         if (this.loginState.isLoggedIn()) {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("rejestr.xhtml");
+                if (this.loginState.isAdmin()) {
+                    try {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("rejestr.xhtml");
+                    } catch (IOException e) {
+                    }
+                } else {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                }
             } catch (IOException e) {
             }
-        }
-    }
-
-    public void _rejestrRedirect() {
-        if (this.loginState.isLoggedIn()) {
+        } else {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../rejestr.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {
             }
         }
@@ -128,16 +140,19 @@ public class DashboardMB implements Serializable {
     public void zgloszeniaRedirect() {
         if (this.loginState.isLoggedIn()) {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("zgloszenia.xhtml");
+                if (this.loginState.isAdmin()) {
+                    try {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("zgloszenia.xhtml");
+                    } catch (IOException e) {
+                    }
+                } else {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml");
+                }
             } catch (IOException e) {
             }
-        }
-    }
-
-    public void _zgloszeniaRedirect() {
-        if (this.loginState.isLoggedIn()) {
+        } else {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../zgloszenia.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {
             }
         }
