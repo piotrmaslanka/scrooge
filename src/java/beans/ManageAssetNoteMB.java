@@ -6,6 +6,7 @@
 package beans;
 
 import components.LoginState;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -64,8 +65,12 @@ public class ManageAssetNoteMB {
         this.assetsService.updateAsset(this.assetNote.getAssets());
         this.assetNote.setIsSolved(true);
         this.assetNotesService.updateAssetNotes(this.assetNote);
-        
+                
         FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Zaktualizowano", "Obsłużono notę"));    
+        
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("zgloszenia.xhtml");
+        } catch (IOException e) {}        
     }
 }

@@ -66,6 +66,8 @@ public class ManageAssetNotesMB {
         this.assetNote.setUsers(this.loginState.getUser());        
         this.assetNote.setIsSolved(false);
         this.assetNote.setWhenCreated(new Date());
+        // Assert valid ID
+        this.assetNote.setId((int)(System.currentTimeMillis() / 10000));        
         
         this.assetNotesService.addAssetNotes(this.assetNote);
             FacesContext.getCurrentInstance().addMessage(null, 
