@@ -77,7 +77,7 @@ public class ManageAssetsMB implements Serializable {
         Map<String, String> usermap = new HashMap<>();
         for (Users user : this.usersService.getAllUsers())
             usermap.put(user.getName()+" "+user.getPassword(), user.getLogin());
-        usermap.put("Nikt", null);
+//        usermap.put("Nikt", null);
         return usermap;
     }
     
