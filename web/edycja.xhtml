@@ -14,7 +14,7 @@
     <h:body>
         <div id="header">
             <div id="logo">
-                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+                <a href="admin.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
             </div>
             <div id="text">
                 <p>System ewidencji majatku</p>
@@ -73,7 +73,8 @@
                     <p:growl id="messages"></p:growl>
                     <p:panelGrid columns="2">
                         <p:outputLabel value="Nazwa nowej sali"></p:outputLabel>
-                        <p:inputText value="#{manageLocationsMB.location.id}"></p:inputText>  
+                        <p:inputText value="#{manageLocationsMB.location.id}" required="true"></p:inputText>  
+
                     </p:panelGrid>                           
                     <p:commandButton value="Dodaj salę" action="#{manageLocationsMB.addLocation}" update="messages" ajax="false"></p:commandButton>
                 </h:form>

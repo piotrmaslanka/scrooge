@@ -12,7 +12,7 @@
     <h:body>
         <div id="header">
             <div id="logo">
-                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+                <a href="admin.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
             </div>
             <div id="text">
                 <p>System ewidencji majatku</p>
@@ -63,23 +63,23 @@
                 <h:form id="form2">
                     <p:growl id="messages"></p:growl>
                     <p:panelGrid columns="2">
-                        <p:outputLabel value="Nr ewidencyjny"></p:outputLabel>
-                        <p:inputText value="#{manageAssetMB.asset.id}"></p:inputText>  
+                        <p:outputLabel for="id" value="Nr ewidencyjny"></p:outputLabel>
+                        <p:inputText id="id" required="true" value="#{manageAssetMB.asset.id}"></p:inputText>  
                         <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
                         <p:selectOneMenu value="#{manageAssetMB.targetUser}">
                             <f:selectItem itemLabel="Wybierz użytkownika" />
                             <f:selectItems value="#{manageAssetMB.userChoices}" />
                         </p:selectOneMenu>
-                        <p:outputLabel value="Lokalizacja"></p:outputLabel>
-                        <p:selectOneMenu value="#{manageAssetMB.targetLocation}">
+                        <p:outputLabel for="loc" value="Lokalizacja"></p:outputLabel>
+                        <p:selectOneMenu id="loc" required="true" value="#{manageAssetMB.targetLocation}">
                             <f:selectItem itemLabel="Wybierz lokalizację" />
                             <f:selectItems value="#{manageAssetMB.locationChoices}" />
                         </p:selectOneMenu>                
 
-                        <p:outputLabel value="Data zakupu"></p:outputLabel>
-                        <p:calendar value="#{manageAssetMB.asset.purchaseDate}" /> 
-                        <p:outputLabel value="Opis"></p:outputLabel>
-                        <p:inputText value="#{manageAssetMB.asset.description}"></p:inputText>  
+                        <p:outputLabel for="date" value="Data zakupu"></p:outputLabel>
+                        <p:calendar id="date" required="true" value="#{manageAssetMB.asset.purchaseDate}" /> 
+                        <p:outputLabel for="opis" value="Opis"></p:outputLabel>
+                        <p:inputText id="opis" required="true" value="#{manageAssetMB.asset.description}"></p:inputText>  
                         <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
                         <p:inputText value="#{manageAssetMB.asset.extraInfo}"></p:inputText>  
                         <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
