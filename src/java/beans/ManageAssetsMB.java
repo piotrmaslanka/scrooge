@@ -94,6 +94,20 @@ public class ManageAssetsMB implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
             } catch (IOException e) {}
   
+        // check name uniqueness
+        boolean unique = false;
+        try {
+            this.assetsService.getAssetById(this.asset.getId());           
+        } catch (IndexOutOfBoundsException e) {
+            unique = true;
+        }
+        
+        if (!unique) {
+            FacesContext.getCurrentInstance().addMessage(null, 
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błąd", "ID nie jest unikatowe"));             
+            return;
+        }
+        
         this.asset.setLocation(this.getLocation());
         if (this.targetUser != null)
             this.asset.setUsers(this.usersService.getUserByLogin(this.targetUser));

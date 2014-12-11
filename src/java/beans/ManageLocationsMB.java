@@ -63,6 +63,23 @@ public class ManageLocationsMB implements Serializable {
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {}
+        
+        
+  
+        // check name uniqueness
+        boolean unique = false;
+        try {
+            this.locationService.getLocationById(this.location.getId());           
+        } catch (IndexOutOfBoundsException e) {
+            unique = true;
+        }
+        
+        if (!unique) {
+            FacesContext.getCurrentInstance().addMessage(null, 
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błąd", "ID nie jest unikatowe"));             
+            return;
+        }        
+        
         this.locationService.addLocation(this.location);
         FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Dodano", "Dodano nową salę"));        
