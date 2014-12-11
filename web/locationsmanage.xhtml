@@ -14,7 +14,7 @@
     <h:body>
         <div id="header">
             <div id="logo">
-                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+                <a href="admin.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
             </div>
             <div id="text">
                 <p>System ewidencji majatku</p>
@@ -86,18 +86,18 @@
                 <h:form id="form2">
                     <p:growl id="messages"></p:growl>
                     <p:panelGrid columns="2">
-                        <p:outputLabel value="Nr ewidencyjny"></p:outputLabel>
-                        <p:inputText value="#{manageAssetsMB.asset.id}"></p:inputText>  
+                        <p:outputLabel for="id" value="Nr ewidencyjny"></p:outputLabel>
+                        <p:inputText id="id" value="#{manageAssetsMB.asset.id}" required="true"></p:inputText>  
                         <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
                         <p:selectOneMenu value="#{manageAssetsMB.targetUser}">
                             <f:selectItem itemLabel="Wybierz użytkownika" />
                             <f:selectItems value="#{manageAssetsMB.userChoices}" />
                         </p:selectOneMenu>
 
-                        <p:outputLabel value="Data zakupu"></p:outputLabel>
-                        <p:calendar value="#{manageAssetsMB.asset.purchaseDate}" /> 
-                        <p:outputLabel value="Opis"></p:outputLabel>
-                        <p:inputText value="#{manageAssetsMB.asset.description}"></p:inputText>  
+                        <p:outputLabel for="data" value="Data zakupu *"></p:outputLabel>
+                        <p:calendar id="data" value="#{manageAssetsMB.asset.purchaseDate}" required="true" /> 
+                        <p:outputLabel for="opis" value="Opis"></p:outputLabel>
+                        <p:inputText id="opis" value="#{manageAssetsMB.asset.description}" required="true"></p:inputText>  
                         <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
                         <p:inputText value="#{manageAssetsMB.asset.extraInfo}"></p:inputText>  
                         <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
