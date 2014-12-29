@@ -24,4 +24,6 @@ public interface ReportItemService {
     public ReportItem getReportItemById(int id);
     
     public List<ReportItem> getAllReportItems();
+
+    public List<ReportItem> getReportItemsByReport(Report selectedReport);
 }

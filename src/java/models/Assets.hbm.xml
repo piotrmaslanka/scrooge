@@ -13,7 +13,7 @@
         <comment>Pe³na nazwa sali (po³o¿enie rodka)</comment>
       </column>
     </many-to-one>
-    <many-to-one class="models.Users" fetch="select" name="users">
+    <many-to-one class="models.Users" fetch="select" name="users" cascade="all">
       <column length="256" name="responsibler">
         <comment>Uzytkownik odpowiedzialny za rodek</comment>
       </column>
@@ -53,7 +53,7 @@
         <comment>Czy rodek jest zagubiony/skradziony</comment>
       </column>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="assetNoteses" table="asset_notes">
+    <set fetch="select" inverse="true" lazy="true" name="assetNoteses" table="asset_notes" cascade="all">
       <key>
         <column length="30" name="id_asset">
           <comment>ID rodka</comment>
@@ -61,7 +61,7 @@
       </key>
       <one-to-many class="models.AssetNotes"/>
     </set>
-    <set fetch="select" inverse="true" lazy="false" name="lendses" table="lends">
+    <set fetch="select" inverse="true" lazy="false" name="lendses" table="lends" cascade="all">
       <key>
         <column length="30" name="id_asset" not-null="true">
           <comment>ID rodka</comment>

@@ -6,6 +6,7 @@
 package dao;
 
 import java.util.List;
+import models.Report;
 import models.ReportItem;
 
 /**
@@ -24,4 +25,5 @@ public interface ReportItemDAO {
     
     public List<ReportItem> getAllReportItems();
     
+    public List<ReportItem> getReportItemsByReport(Report report);
 }

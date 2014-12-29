@@ -5,8 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <link rel="stylesheet" type="text/css" href="style.css" />
@@ -14,7 +13,7 @@
     <h:body>
         <div id="header">
             <div id="logo">
-                <a href="admin.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
             </div>
             <div id="text">
                 <p>System ewidencji majatku</p>
@@ -28,9 +27,6 @@
                     <li>
                         <p>
                             Zalogowany jako: <p:outputLabel value="#{dashboardMB.loginState.user.login}"></p:outputLabel><br></br>
-                            Prawa dostępu  : 
-                            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Administrator</c:if>
-                            <c:if test="#{dashboardMB.loginState.user.isAdmin == false}">Użytkownik</c:if><br></br>
                             Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
                         </p>
                     </li>
@@ -39,7 +35,7 @@
                     <li><p:commandButton value="Rejestr wypozyczen"
                                          actionListener="#{dashboardMB.rejestrRedirect()}" /></li>
                     <li><p:commandButton value="Zarzadzanie kontami"
-                                         actionListener="#{bookBean.saveBook}" /></li>
+                                         actionListener="#{dashboardMB.zarzadzanieKontamiRedirect()}" /></li>
                     <li><p:commandButton value="Edycja majatku"
                                          actionListener="#{dashboardMB.edycjaRedirect()}" /></li>
                     <li><p:commandButton value="Zgłoszenia"
@@ -52,65 +48,155 @@
             </h:form>
         </div>
 
-        <div id="container">
-            <h:form>
+        <h:panelGroup layout="block" id="container">
+            
+            <h:panelGroup layout="block" id="locationsDiv">
+            
+                <h:form id="locationsDataTableform">
 
-                <h:panelGrid columns="3" cellpadding="5">
-                    <h:outputLabel for="menu1" />
-                    <p:selectCheckboxMenu id="menu1" value="#{bean.func}" label="Sala"
-                                          filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                        <f:selectItems value="#{bean.func}" />
-                    </p:selectCheckboxMenu>
-                    <p:commandLink value="Wybierz"/>
-                </h:panelGrid>
+                    <p:dataTable value="#{manageAssetsMB.locations}"
+                         selectionMode="single" 
+                         var="location" 
+                         selection="#{manageAssetsMB.selectedLocation}" 
+                         rowKey="#{location.id}"
+                         rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Sale" filterBy="#{location.id}" filterMatchMode="contains">#{location.id}</p:column>
+                            <f:facet name="footer">
+                                <p:commandButton value="Pokaz audyty" actionListener="#{manageAssetsMB.findAssetsForSelectedLocation()}" update="@this,:assetsForm" ajax ="true"/>
+                            </f:facet>
+                    </p:dataTable>
+                </h:form>
+            
+            </h:panelGroup>
+            <br/>
+            <h:panelGroup id="assetsDiv" layout="block">
+                <h:form id="assetsForm">    
+                    <p:growl id="messages" showDetail="true" />
+                    <p:dataTable  id="auditTable" value="#{manageAssetsMB.assetsForSelecetedLocation}" var="selectedAsset" editable="true"  >
+                        <f:facet name="header">
+                            Audyty dla sali : #{manageAssetsMB.selectedLocation.id}
+                        </f:facet>  
+                        
+                        <p:ajax event="rowEdit" listener="#{manageAssetsMB.onRowEdit}" update="@this,:assetsForm:messages" />
+                        <p:ajax event="rowEditCancel" listener="#{manageAssetsMB.onRowEditCancel}" update="@this,:assetsForm:messages" />
+                        
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{selectedAsset.id}" />
+                                </p:column>
 
-                <p:dataTable var="VAR" value="#{bean.func}">
-                    <p:column headerText="Id">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
+                                <p:column headerText="Lokacja">
+                                    <h:outputText value="#{selectedAsset.location.id}" />
+                                </p:column>
+                        
+                                
 
-                    <p:column headerText="Lokacja">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
+                                <p:column headerText="Os. odpowiedzialna">
+                                    <h:outputText value="#{selectedAsset.users.login}" />
+                                </p:column>
 
-                    <p:column headerText="Os. odpowiedzialna">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
+                                <p:column headerText="Data zakupu">
+                                    <h:outputText value="#{selectedAsset.purchaseDate}" />
+                                </p:column>
 
-                    <p:column headerText="Data zakupu">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
+                                <p:column headerText="Inf. dodatkowe">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{selectedAsset.extraInfo}" /></f:facet>
+                                        <f:facet name="input"><p:inputText id="extraInfoInput" value="#{selectedAsset.extraInfo}" style="width:100%"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                
+                                <p:column headerText="Opis">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{selectedAsset.description}" /></f:facet>
+                                        <f:facet name="input"><p:inputText id="description" value="#{selectedAsset.description}" style="width:100%"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                                               
+                        
+                                <p:column headerText="Wypozyczalny?" style="width:32px">
+                                    
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                                    <p:selectBooleanButton  value="#{selectedAsset.isLendable}" onLabel="Yes" offLabel="No" style="width:60px" disabled="true" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:selectBooleanButton value="#{selectedAsset.isLendable}" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:60px">
+                                            </p:selectBooleanButton> 
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+ 
+                                <p:column headerText="Srodek materialny?" style="width:32px">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:selectBooleanButton  value="#{selectedAsset.isMaterial}" onLabel="Yes" offLabel="No" style="width:60px" disabled="true" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:selectBooleanButton value="#{selectedAsset.isMaterial}" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:60px">
+                                            </p:selectBooleanButton> 
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                 
 
-                    <p:column headerText="Inf. dodatkowe">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
+                                <p:column headerText="Zniszczony?" style="width:32px">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <p:selectBooleanButton  value="#{selectedAsset.isDamaged}" onLabel="Yes" offLabel="No" style="width:60px" disabled="true" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:selectBooleanButton value="#{selectedAsset.isDamaged}" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:60px">
+                                            </p:selectBooleanButton> 
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                        
+                                <p:column headerText="Zgubiony?">
+                                    <p:cellEditor>
+                                        
+                                        <f:facet name="output">
+                                            <p:selectBooleanButton  value="#{selectedAsset.isLost}" onLabel="Yes" offLabel="No" style="width:60px" disabled="true" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:selectBooleanButton value="#{selectedAsset.isLost}" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:60px">
+                                            </p:selectBooleanButton> 
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                        
+                                <p:column style="width:32px">
+                                        <p:rowEditor  />
+                                </p:column>
+                       
+                    </p:dataTable>
+                </h:form>
+            </h:panelGroup>
+            
+            <h:panelGroup id="genereteReportDiv">
+                <h:form id="genereteReportForm">
+                    <p:growl id="generateReportMessages" showDetail="true" />
+                    <p>
+                        <p:outputLabel value="Opis raportu: "></p:outputLabel>
+                    </p>
+                    <p>
+                        <p:inputTextarea value="#{manageAssetsMB.newReportExtraInfo}" required="true" requiredMessage="Nalezy wprowadzic opis raportu"> </p:inputTextarea>  
+                    </p>
+                    <p>
+                        <p:commandButton actionListener="#{manageAssetsMB.generujRaport()}" value="Generuj raport" update=":genereteReportForm,:genereteReportForm:generateReportMessages"></p:commandButton>
+                    </p>
+                </h:form>
+            </h:panelGroup>
+        </h:panelGroup>
+        
 
-                    <p:column headerText="Zgubiony?">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
-
-                    <p:column headerText="Zniszczony?">
-                        <h:outputText value="#{bean.func}" />
-                    </p:column>
-                </p:dataTable>
-
-
-                <p class="x">
-                    <p:commandButton value="Potwierdź"
-                                     actionListener="#{bookBean.saveBook}" /></p>	
-            </h:form>
-        </div>
-
-
-
-        <div id="footer">
+<!--        <div id="footer">
             <div id="footer_text">
                 <p>Copyright &copy; by L4</p>
             </div>
-        </div>
-
-
-
+        </div>  -->
     </h:body>
 
 </html>

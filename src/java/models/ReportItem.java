@@ -35,6 +35,15 @@ public class ReportItem  implements java.io.Serializable {
        this.isDamaged = isDamaged;
        this.isLost = isLost;
     }
+    
+    public ReportItem(Assets assets, Report report, String extraInfo, boolean isDamaged, boolean isLost) {
+       this.assets = assets;
+       this.report = report;
+       this.extraInfo = extraInfo;
+       this.isDamaged = isDamaged;
+       this.isLost = isLost;
+    }
+    
    
     public int getId() {
         return this.id;

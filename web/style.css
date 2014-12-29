@@ -61,7 +61,7 @@ html, body {
 #container{
 	float: left;
 	width: 80%;
-	height:600px;
+/*	height:600px;*/
 	background-color: white;
 	overflow: hidden;
 }
