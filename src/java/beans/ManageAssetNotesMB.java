@@ -31,7 +31,6 @@ public class ManageAssetNotesMB {
     public void setLoginState(LoginState loginState) { this.loginState = loginState; }
     public LoginState getLoginState() { return this.loginState; }    
     
-    
     @ManagedProperty(value="#{assetsServiceImpl}")
     private AssetsService assetsService;
     public void setAssetsService(AssetsService assetsService) { this.assetsService = assetsService; }
