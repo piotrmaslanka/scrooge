@@ -23,7 +23,7 @@ public class Lends  implements java.io.Serializable {
 
 	
     public Lends(int id, Assets assets, Users users, Date lendFrom, Date lendTo, String purpose) {
-        this.id = id;
+       this.id = id;
         this.assets = assets;
         this.users = users;
         this.lendFrom = lendFrom;
@@ -89,9 +89,6 @@ public class Lends  implements java.io.Serializable {
     public void setExtraInfo(String extraInfo) {
         this.extraInfo = extraInfo;
     }
-
-
-
 
 }
 

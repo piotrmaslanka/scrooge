@@ -128,10 +128,15 @@ public class ManageAssetMB {
     
     public void lendAsset() {
         this.lend.setAssets(this.asset);
+        this.lend.setId((int)(System.currentTimeMillis() / 10000));      
         this.lend.setUsers(this.loginState.getUser());
         this.lendsService.addLend(this.lend);
         FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Wypożyczono", "Wypożyczono środek"));
+        
+        // reload asset
+        String ida = this.asset.getId();        
+        this.asset = this.assetsService.getAssetById(ida);
     }
     
     public void updateAsset() {
