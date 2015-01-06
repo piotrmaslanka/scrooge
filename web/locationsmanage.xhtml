@@ -64,7 +64,7 @@
                 </div>
 
                 <h:form id="form">
-                    <p:dataTable value="#{manageAssetsMB.assets}" var="asset" type="ordered">
+                    <p:dataTable value="#{manageAssetsMB.assets}" var="asset">
                         <f:facet name="header">Środki</f:facet>
                         <p:column headerText="Id">
                             <h:outputText value="#{asset.id}" />

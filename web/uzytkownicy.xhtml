@@ -5,8 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-        xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<link rel="stylesheet" type="text/css" href="style.css" />
@@ -14,152 +13,184 @@
 <h:body>
 	<div id="header">
 				<div id="logo">
-					<a href="admin.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+					<a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
 				</div>
 				<div id="text">
 				<p>System ewidencji majatku</p>
 				</div>
-			
 	</div>
 	
-	<div id="menu">
-		<h:form>
-			<ul>
-				<li><p>Zalogowany jako admin.</p></li>
-				<li><p:commandButton value="Raporty"
-						actionListener="#{bookBean.saveBook}" /></li>
-				<li><p:commandButton value="Rejestr wypozyczen"
-						actionListener="#{bookBean.saveBook}" /></li>
-				<li><p:commandButton value="Zarzadzanie kontami"
-						actionListener="#{bookBean.saveBook}" /></li>
-				<li><p:commandButton value="Edycja majatku"
-						actionListener="#{bookBean.saveBook}" /></li>
-				<li><p:commandButton value="Zgłoszenia"
-						actionListener="#{bookBean.saveBook}" /></li>
-				<li><p:commandButton value="Audyt"
-						actionListener="#{bookBean.saveBook}" /></li>
-				<li class="down"><p:commandButton value="Wyloguj"
-						actionListener="#{bookBean.saveBook}" /></li>
-			</ul>
-		</h:form>
-	</div>
+        <div id="menu">
+            <h:form>
+                <ul>
+                    <li>
+                        <p>
+                            Zalogowany jako: <p:outputLabel value="#{dashboardMB.loginState.user.login}"></p:outputLabel><br></br>
+                            Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
+                        </p>
+                    </li>
 
-	<div id="container">
-		<h:form>
-			<p:tabView>
-				<p:tab title="Dodaj">
+                    <li><p:commandButton value="Raporty"
+                                         actionListener="#{dashboardMB.raportyRedirect()}" /></li>
+                    <li><p:commandButton value="Rejestr wypozyczen"
+                                         actionListener="#{dashboardMB.rejestrRedirect()}" /></li>
+                    <li><p:commandButton value="Zarzadzanie kontami"
+                                         actionListener="#{dashboardMB.zarzadzanieKontamiRedirect()}" /></li>
+                    <li><p:commandButton value="Edycja majatku"
+                                         actionListener="#{dashboardMB.edycjaRedirect()}" /></li>
+                    <li><p:commandButton value="Zgłoszenia"
+                                         actionListener="#{dashboardMB.zgloszeniaRedirect()}" /></li>
+                    <li><p:commandButton value="Audyt"
+                                         actionListener="#{dashboardMB.audytRedirect()}" /></li>
+                    <li class="down"><p:commandButton value="Wyloguj"
+                                                      actionListener="#{loginMB.doLogout()}" /></li>
+                </ul>
+            </h:form>
+        </div>
+
+    <h:panelGroup layout="block" id="container" >
+            
+            <h:panelGroup id="addUserDiv">
+                 <h:form id="addForm">
 						<table>
-						<tr>
-							<td><p>Imie:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Login:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Hasło:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Pesel:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>E-mail:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Data utworzenia:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
+                                                    <tr>
+                                                            <td><p>Imie:</p></td>
+                                                            <td><p:inputText value="#{usersMB.user.name}" required="true" requiredMessage="Imie jest wymagane"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td><p>Nazwisko:</p></td>
+                                                            <td><p:inputText value="#{usersMB.user.surname}" required="true" requiredMessage="Nazwisko jest wymagane"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td><p>Login:</p></td>
+                                                            <td><p:inputText value="#{usersMB.user.login}" required="true" requiredMessage="Login jest wymagany"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td><p>Hasło:</p></td>
+                                                            <td><p:password value="#{usersMB.user.password}" required="true" requiredMessage="Haslo jest wymagane"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td><p>Pesel:</p></td>
+                                                            <td><p:inputText value="#{usersMB.user.pesel}" required="true" requiredMessage="Pesel jest wymagany"/></td>
+                                                    </tr>                                                                                                       
+                                                    <tr>
+                                                            <td><p>Data urodzenia</p></td>
+                                                            <td><p:calendar value="#{usersMB.user.birthdate}" timeOnly="false" pattern="dd/MM/yyyy" converterMessage="Data musi być w formacie DD/MM/YYYY i być poprawną datą" required="true" requiredMessage="Data jest wymagana"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td><p>Prawa admina</p></td>
+                                                            <td><p:selectBooleanCheckbox value="#{usersMB.user.isAdmin}" required="true" /></td>
+                                                    </tr>    
 						</table>
 						<p class="x">
-					<p:commandButton value="Akceptuj"
-						actionListener="#{bookBean.saveBook}" /></p>
-				
-					
-					
-				</p:tab>
-				<p:tab title="Usun">
-						<table>
-						<tr>
-							<td><p>Imie:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Login:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Hasło:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Pesel:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>E-mail:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Data utworzenia:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						</table>
-						<p class="x">
-					<p:commandButton value="Akceptuj"
-						actionListener="#{bookBean.saveBook}" /></p>
-				
-					
-				</p:tab>
-				
-				<p:tab title="Edytuj">
-					<table>
-						<tr>
-							<td><p>Imie:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Login:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Hasło:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Pesel:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>E-mail:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						<tr>
-							<td><p>Data utworzenia:</p></td>
-							<td><p:inputText value="#{bean.propertyName}" /></td>
-						</tr>
-						</table>
-						<p class="x">
-					<p:commandButton value="Akceptuj"
-						actionListener="#{bookBean.saveBook}" /></p>					
-				
-				</p:tab>
-				</p:tabView>
-		</h:form>
-	</div>
+                                                    <p:commandButton  value="Akceptuj" icon="ui-icon-check"
+                                                                      actionListener="#{usersMB.register()}" ajax="true" update="@this,:addForm,:deleteForm,:editForm"/></p>
+                                                         
+                                    </h:form>     
+            </h:panelGroup>
+            <br/>
+            <h:panelGroup id="deleteDiv" layout="block">
+                  <h:form id="deleteForm">
+                                        <p:dataTable id="singleDT" var="user" value="#{usersMB.users}" selectionMode="single" selection="#{usersMB.selectedUser}" rowKey="#{user.login}">
+                                                    <f:facet name="header">
+                                                        Lista użytkowników
+                                                    </f:facet>
+                                                    <p:column headerText="Login">
+                                                        <h:outputText value="#{user.login}" />
+                                                    </p:column>
+                                                    <p:column headerText="Imie">
+                                                        <h:outputText value="#{user.name}" />
+                                                    </p:column>
+                                                    <p:column headerText="Nazwisko">
+                                                        <h:outputText value="#{user.surname}" />
+                                                    </p:column>
+                                            
+                                                    <f:facet name="footer">
+                                                        <p:commandButton icon="ui-icon-trash" value="Usun" actionListener="#{usersMB.deleteSelectedUser()}" update="@this,:deleteForm,:editForm" />
+                                                    </f:facet>
+     
+                                        </p:dataTable>
+                                    </h:form>
+                
+            </h:panelGroup>
+            <br/>
+            <h:panelGroup id="editDiv" layout="block">
+                         <h:form id="editForm">
+                                               <p:growl id="msgs" showDetail="true"/>
+                                               <p:dataTable id="usersEdit" var="user" value="#{usersMB.users}" editable="true" style="margin-bottom:20px">
+                                                    <f:facet name="header">
+                                                        Edytuj Dane Uzytkownika
+                                                    </f:facet>
+                                                    
+                                                   <p:ajax event="rowEdit" listener="#{usersMB.onRowEdit}" update=":editForm:msgs" />
 
+                                                    <p:column headerText="Login">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"><h:outputText value="#{user.login}" /></f:facet>
+                                                            <f:facet name="input"><p:inputText id="modelInput" value="#{user.login}" style="width:100%" required="true"/></f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
 
+                                                    <p:column headerText="Imie">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"><h:outputText value="#{user.name}" /></f:facet>
+                                                            <f:facet name="input"><p:inputText value="#{user.name}" style="width:100%" label="Imie" required="true" requiredMessage="Imie jest wymagane"/></f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
 
-	<div id="footer">
+                                                    <p:column headerText="Nazwisko">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"><h:outputText value="#{user.surname}" /></f:facet>
+                                                            <f:facet name="input"><p:inputText value="#{user.surname}" style="width:100%" label="Nazwisko" required="true" requiredMessage="Nazwisko jest wymagane"/></f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
+
+                                                    <p:column headerText="Pesel">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"><h:outputText value="#{user.pesel}" /></f:facet>
+                                                            <f:facet name="input"><p:inputText value="#{user.pesel}" style="width:100%" label="Pesel" required="true" requiredMessage="Pesel jest wymagany"/></f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
+                                                   
+                                                   
+                                                    <p:column headerText="Data urodzenia">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"><h:outputText value="#{user.birthdate}" /></f:facet>
+                                                            <f:facet name="input"><p:calendar value="#{user.birthdate}" style="width:100%" label="Pesel" pattern="dd/MM/yyyy" converterMessage="The Date must be of the form DD/MM/YYYY and be a valid date" required="true" requiredMessage="Data urodzenia jest wymagana"/></f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
+                                                   
+                                                    <p:column headerText="Prawa admina">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"> <p:selectBooleanCheckbox value="#{user.isAdmin}"  disabled="true" /></f:facet>
+                                                            <f:facet name="input">
+                                                                <p:selectBooleanCheckbox value="#{user.isAdmin}" required="true" requiredMessage="Nalezy ustawic prawa admina"/>
+                                                            </f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
+                                                   
+                                                    <p:column headerText="Hasło">
+                                                        <p:cellEditor>
+                                                            <f:facet name="output"> <p:outputLabel value="***********"  /></f:facet>
+                                                            <f:facet name="input">
+                                                                <p:password value="#{user.password}" required="true" requiredMessage="hasło jest wymagane" />
+                                                            </f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
+
+                                                    <p:column style="width:32px">
+                                                        <p:rowEditor />
+                                                    </p:column>
+                                                </p:dataTable>
+                                    </h:form>        
+            </h:panelGroup>
+</h:panelGroup>
+    
+<!--	<div id="footer">
 		<div id="footer_text">
 			<p>Copyright &copy; by L4</p>
 		</div>
-	</div>
-
-
+	</div>-->
 
 </h:body>
 

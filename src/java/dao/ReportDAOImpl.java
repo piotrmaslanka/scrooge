@@ -6,6 +6,7 @@
 package dao;
 
 import java.util.List;
+import models.Location;
 import org.hibernate.SessionFactory;
 import models.Report;
 import models.Users;
@@ -56,6 +57,12 @@ public class ReportDAOImpl implements ReportDAO{
     @Override
     public List<Report> getAllRepors() {
         List list = getSessionFactory().getCurrentSession().createQuery("from models.Report").list();
+        return list;
+    }
+
+    @Override
+    public List<Report> getReportsByLocation(Location selectedLocation) {
+        List list = getSessionFactory().getCurrentSession().createQuery("from models.Report where location="+"'"+selectedLocation.getId()+"'").list();
         return list;
     }
 }

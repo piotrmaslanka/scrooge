@@ -7,6 +7,7 @@ package service;
 
 import dao.ReportDAO;
 import java.util.List;
+import models.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import models.Report;
@@ -57,5 +58,10 @@ public class ReportServiceImpl implements ReportService{
      */
     public void setReportDAO(ReportDAO reportDAO) {
         this.reportDAO = reportDAO;
+    }
+    
+    @Override
+    public List<Report> getReportsByLocation(Location selectedLocation) {
+        return getReportDAO().getReportsByLocation(selectedLocation);
     }
 }

@@ -6,7 +6,7 @@
     <comment>Raport z ewidencji pojedynczej sali</comment>
     <id name="id" type="int">
       <column name="id"/>
-      <generator class="assigned"/>
+      <generator class="increment"/>
     </id>
     <many-to-one class="models.Location" fetch="select" name="location">
       <column length="10" name="location" not-null="true">
@@ -23,7 +23,7 @@
         <comment>Informacje dodatkowe</comment>
       </column>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="reportItems" table="report_item">
+    <set fetch="select" inverse="true" lazy="false" name="reportItems" table="report_item">
       <key>
         <column name="id_report" not-null="true">
           <comment>ID powi¹zanego raportu</comment>

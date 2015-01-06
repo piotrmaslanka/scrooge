@@ -157,5 +157,14 @@ public class DashboardMB implements Serializable {
             }
         }
     }
+    
+    public void zarzadzanieKontamiRedirect(){
+        if (this.loginState.isLoggedIn()) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("uzytkownicy.xhtml");
+            } catch (IOException e) {
+            }
+        }
+    }
 
 }

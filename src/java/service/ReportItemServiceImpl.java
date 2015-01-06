@@ -7,6 +7,7 @@ package service;
 
 import dao.ReportItemDAO;
 import java.util.List;
+import models.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import models.ReportItem;
@@ -59,4 +60,8 @@ public class ReportItemServiceImpl implements ReportItemService{
         this.reportItemDAO = reportItemDAO;
     }
     
+    @Override
+    public List<ReportItem> getReportItemsByReport(Report selectedReport) {
+        return getReportItemDAO().getReportItemsByReport(selectedReport);
+    }
 }

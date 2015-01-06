@@ -5,21 +5,20 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <link rel="stylesheet" type="text/css" href="style.css" />
     </h:head>
+    
     <h:body>
         <div id="header">
             <div id="logo">
-                <a href="admin.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
+                <a href="index.xhtml" title="Strona glowna"><img src="LogoPRz.gif" alt="logo" title="PRz" border="0" /></a>
             </div>
             <div id="text">
                 <p>System ewidencji majatku</p>
             </div>
-
         </div>
 
         <div id="menu">
@@ -28,19 +27,16 @@
                     <li>
                         <p>
                             Zalogowany jako: <p:outputLabel value="#{dashboardMB.loginState.user.login}"></p:outputLabel><br></br>
-                            Prawa dostępu  : 
-                            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Administrator</c:if>
-                            <c:if test="#{dashboardMB.loginState.user.isAdmin == false}">Użytkownik</c:if><br></br>
                             Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
                         </p>
                     </li>
-
+                    
                     <li><p:commandButton value="Raporty"
                                          actionListener="#{dashboardMB.raportyRedirect()}" /></li>
                     <li><p:commandButton value="Rejestr wypozyczen"
                                          actionListener="#{dashboardMB.rejestrRedirect()}" /></li>
                     <li><p:commandButton value="Zarzadzanie kontami"
-                                         actionListener="#{bookBean.saveBook}" /></li>
+                                         actionListener="#{dashboardMB.zarzadzanieKontamiRedirect()}" /></li>
                     <li><p:commandButton value="Edycja majatku"
                                          actionListener="#{dashboardMB.edycjaRedirect()}" /></li>
                     <li><p:commandButton value="Zgłoszenia"
@@ -53,41 +49,151 @@
             </h:form>
         </div>
 
-        <div id="container">
-            <h:form>
-                <table>
-                    <tr>
-                        <td><p>Sala:</p></td>
-                        <td><p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
-                                <f:selectItem itemLabel="Select One" itemValue="" />
-                                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-                            </p:selectOneMenu></td>
-                    </tr>
-                    <tr>
-                        <td><p>Generuj raport:</p></td>
-                        <td>
-                            <p:commandButton type="reset" value="PDF" />
-                            <p:commandButton type="reset2" value="Excel" />
-                            <p:commandButton type="reset" value="Word" />
+        <h:panelGroup layout="block" id="container">
+            <h:panelGroup layout="block" id="locationsDiv">
+            
+                <h:form id="locationsDataTableform">
+                    <p:dataTable value="#{reportsMB.locations}"
+                         selectionMode="single" 
+                         var="location" 
+                         selection="#{reportsMB.selectedLocation}" 
+                         rowKey="#{location.id}"
+                         rows="5"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        <p:column headerText="Sale" filterBy="#{location.id}" filterMatchMode="contains">#{location.id}</p:column>
+                            <f:facet name="footer">
+                                <p:commandButton value="Pokaz raporty" actionListener="#{reportsMB.findReportsForSelectedLocation()}" update="@this,:reportsform,:reportsDetailsForm" ajax = "true"/>
+                            </f:facet>
+                    </p:dataTable>
+                </h:form>
+            </h:panelGroup>
+            
+            <br></br>
+            <br></br>
+            
+            <h:panelGroup layout="block" id="reportsDiv">
+            
+                <h:form id="reportsform">
 
-                        </td>
-                    </tr>
-                </table>
-            </h:form>
-        </div>
+                    <p:dataTable value="#{reportsMB.reportsForSelecetedLocation}"
+                         selectionMode="single" 
+                         var="report" 
+                         selection="#{reportsMB.selectedReport}" 
+                         rowKey="#{report.id}"
+                         rows="5"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        
+                        <f:facet name="header">
+                            Raporty dla sali : #{reportsMB.selectedLocation.id}
+                        </f:facet>  
+                        
+                        <p:column headerText="Opis raportu" filterBy="#{report.extraInfo}" filterMatchMode="contains">#{report.extraInfo}</p:column>
+                        
+                        <p:column headerText="Data Wykonania" filterBy="#{report.whenDone}" filterMatchMode="contains">#{report.whenDone}</p:column>                        
+                        <f:facet name="footer">
+                            <p:commandButton value="Pokaz szczegoly raportu" actionListener="#{reportsMB.findReportItemsForSelectedReport()}" update="@this, :reportsDetailsForm" ajax ="true"/>
+                        </f:facet>
+                    </p:dataTable>
+                </h:form>
+            
+            </h:panelGroup>
+            
+            <br></br>
+            <br></br>
+            
+            <h:panelGroup layout="block" id="reportsDetailsDiv">
+            
+                <h:form id="reportsDetailsForm">
 
+                    <p:dataTable id="report" value="#{reportsMB.reportItemsForSelectedReport}"
+                         var="reportItem" 
+                         rowKey="#{reportItem.id}"
+                         rows="5"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        
+                        <f:facet name="header">
+                            <h:outputText value="Szczegoly wybranego raportu"></h:outputText>
+                        </f:facet>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="id" />
+                            </f:facet>
+                            <h:outputText value="#{reportItem.assets.id}" />
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="opis" />
+                            </f:facet>
+                            <h:outputText value="#{reportItem.assets.description}" />
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="zakupiono" />
+                            </f:facet>
+                            <h:outputText value="#{reportItem.assets.purchaseDate}" />
+                        </p:column> 
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="informacje" />
+                            </f:facet>
+                            <h:outputText value="#{reportItem.extraInfo}" />
+                        </p:column>  
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="zniszczony" />
+                            </f:facet>
+                            <h:outputText value="#{reportItem.isDamaged? 'tak' : 'nie'}" />
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="zgubiony" />
+                            </f:facet>
+                            <h:outputText value="#{reportItem.isLost? 'tak' : 'nie'}" />
+                        </p:column>
+                        
+                        <f:facet name="footer">
+                            <h:commandLink value="Export XLS">
+<!--                                <p:graphicImage name="/demo/images/excel.png" width="24"/>-->
+                                <p:dataExporter type="xls" target="report" fileName="report" />
+                            </h:commandLink>
 
+                            <h:commandLink value="Export PDF">
+<!--                                <p:graphicImage name="/demo/images/pdf.png" width="24"/>-->
+                                <p:dataExporter type="pdf" target="report" fileName="report" preProcessor="#{reportsMB.preProcessPDF}"/>
+                            </h:commandLink>
 
-        <div id="footer">
+                            <h:commandLink value="Export CSV">
+<!--                                <p:graphicImage name="/demo/images/csv.png" width="24"/>-->
+                                <p:dataExporter type="csv" target="report" fileName="report" />
+                            </h:commandLink>
+
+                            <h:commandLink value="Export XML">
+<!--                                <p:graphicImage name="/excel.png" width="32"/>-->
+                                <p:dataExporter type="xml" target="report" fileName="report" />
+                            </h:commandLink>
+                        </f:facet>
+                        
+                    </p:dataTable>
+                </h:form>  
+            </h:panelGroup>
+        </h:panelGroup>
+<!--        <div id="footer">
             <div id="footer_text">
                 <p>Copyright &copy; by L4</p>
             </div>
-        </div>
-
-
+        </div>-->
 
     </h:body>
-
 </html>

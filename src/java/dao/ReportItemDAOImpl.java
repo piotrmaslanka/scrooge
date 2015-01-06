@@ -6,6 +6,7 @@
 package dao;
 
 import java.util.List;
+import models.Report;
 import org.hibernate.SessionFactory;
 import models.ReportItem;
 
@@ -56,6 +57,12 @@ public class ReportItemDAOImpl implements ReportItemDAO{
     public List<ReportItem> getAllReportItems() {
         List list = getSessionFactory().getCurrentSession().createQuery("from models.ReportItem").list();
         return list;
+    }
+
+    @Override
+    public List<ReportItem> getReportItemsByReport(Report report) {
+       List list = getSessionFactory().getCurrentSession().createQuery("from models.ReportItem where id_report=?").setParameter(0,report.getId()).list();
+       return list;
     }
     
 }

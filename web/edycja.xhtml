@@ -55,7 +55,7 @@
 
         <div id="container">
             <h:form id="form">
-                <p:dataTable value="#{manageLocationsMB.allLocations}" var="location" type="ordered">
+                <p:dataTable value="#{manageLocationsMB.allLocations}" var="location">
                     <f:facet name="header">Lokacje</f:facet>
                     <p:column headerText="Sala">
                         <h:outputText value="#{location.id}" />

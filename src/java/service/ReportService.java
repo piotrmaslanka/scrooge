@@ -6,6 +6,7 @@
 package service;
 
 import java.util.List;
+import models.Location;
 import models.Report;
 
 /**
@@ -22,4 +23,6 @@ public interface ReportService {
     public Report getReportById(int id);
     
     public List<Report> getAllRepors();
+    
+    public List<Report> getReportsByLocation(Location selectedLocation);
 }

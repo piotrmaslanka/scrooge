@@ -34,6 +34,19 @@ public class Report  implements java.io.Serializable {
        this.extraInfo = extraInfo;
        this.reportItems = reportItems;
     }
+    
+    public Report( Location location, Date whenDone, String extraInfo, Set<ReportItem> reportItems) {
+       this.location = location;
+       this.whenDone = whenDone;
+       this.extraInfo = extraInfo;
+       this.reportItems = reportItems;
+    }
+    
+    public Report( Location location, Date whenDone, String extraInfo) {
+       this.location = location;
+       this.whenDone = whenDone;
+       this.extraInfo = extraInfo;
+    }
    
     public int getId() {
         return this.id;
