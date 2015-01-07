@@ -65,8 +65,13 @@
                     <h:outputText value="#{var.users.surname}" />
                 </p:column>
 
-                <p:column headerText="Zwrot">
-                    <h:outputText value="#{var.lendTo}" />
+                <p:column headerText="Wypożyczenie">
+                    od <h:outputText value="#{var.lendFrom}" /> do <h:outputText value="#{var.lendTo}" />
+                </p:column>
+
+
+                <p:column headerText="Cel">
+                    <h:outputText value="#{var.purpose}" />
                 </p:column>
             </p:dataTable> 
         </div>
