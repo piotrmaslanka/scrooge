@@ -123,26 +123,24 @@
                     </p:dataTable>
                 </h:form>      
 
-                <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">
-                    <div style="margin-bottom: 20px; margin-top: 20px;">
-                        <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
-                            Wypożycz
-                        </div>
-                        <h:form id="form3" rendered="#{manageAssetMB.canRent}">
-                            <p:panelGrid columns="2">            
-                                <p:outputLabel value="Od"></p:outputLabel>
-                                <p:calendar value="#{manageAssetMB.lend.lendFrom}" />                             
-                                <p:outputLabel value="Do"></p:outputLabel>
-                                <p:calendar value="#{manageAssetMB.lend.lendTo}" />                             
-                                <p:outputLabel value="Cel"></p:outputLabel>
-                                <p:inputText value="#{manageAssetMB.lend.purpose}"></p:inputText>  
-                                <p:outputLabel value="Dodatkowe dane"></p:outputLabel>
-                                <p:inputText value="#{manageAssetMB.lend.extraInfo}"></p:inputText>  
-                                <p:commandButton value="Wypożycz" action="#{manageAssetMB.lendAsset()}" update="messages" ajax="false"></p:commandButton>
-                            </p:panelGrid>
-                        </h:form>    
+                <div style="margin-bottom: 20px; margin-top: 20px;">
+                    <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+                        Wypożycz
                     </div>
-                </c:if>
+                    <h:form id="form3" rendered="#{manageAssetMB.canRent}">
+                        <p:panelGrid columns="2">            
+                            <p:outputLabel value="Od"></p:outputLabel>
+                            <p:calendar value="#{manageAssetMB.lend.lendFrom}" />                             
+                            <p:outputLabel value="Do"></p:outputLabel>
+                            <p:calendar value="#{manageAssetMB.lend.lendTo}" />                             
+                            <p:outputLabel value="Cel"></p:outputLabel>
+                            <p:inputText value="#{manageAssetMB.lend.purpose}"></p:inputText>  
+                            <p:outputLabel value="Dodatkowe dane"></p:outputLabel>
+                            <p:inputText value="#{manageAssetMB.lend.extraInfo}"></p:inputText>  
+                            <p:commandButton value="Wypożycz" action="#{manageAssetMB.lendAsset()}" update="messages" ajax="false"></p:commandButton>
+                        </p:panelGrid>
+                    </h:form>    
+                </div>
 
             </div>
             <div id="footer">
