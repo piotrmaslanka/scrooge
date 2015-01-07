@@ -82,6 +82,7 @@ public class ManageAssetNotesMB {
         if (assetid != null) return 2;
         return 0;       
     }
+    public void setTabIndex(int i) {}
     
     private AssetNotes assetNote = new AssetNotes();
     public void setAssetNote(AssetNotes an) { this.assetNote = an; }
