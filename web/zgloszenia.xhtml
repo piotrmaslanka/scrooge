@@ -100,15 +100,14 @@
                     </p:tab>
 
                     <p:tab title="Zgłoś">
-                        <div id="lewy">
                             <table>
                                 <tr>
                                     <td><p>Id:</p></td>
-                                    <td><p:inputText value="#{manageAssetNotesMB.targetAssetID}" /></td>
+                                    <td><p:inputText required="true" value="#{manageAssetNotesMB.targetAssetID}" /></td>
                                 </tr>
                                 <tr>
                                     <td><p>Problem:</p></td>
-                                    <td><p:inputText value="#{manageAssetNotesMB.assetNote.reason}" /></td>
+                                    <td><p:inputText required="true" value="#{manageAssetNotesMB.assetNote.reason}" /></td>
                                 </tr>
                                 <tr>
                                     <td><p>Uszkodzony?</p></td>
@@ -128,7 +127,6 @@
                                 </tr>
 
                             </table>
-                        </div>
                     </p:tab>
                 </p:tabView>
             </h:form>

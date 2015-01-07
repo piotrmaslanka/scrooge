@@ -40,7 +40,7 @@
                     <li><p:commandButton value="Rejestr wypozyczen"
                                          actionListener="#{dashboardMB.rejestrRedirect()}" /></li>
                     <li><p:commandButton value="Zarzadzanie kontami"
-                                         actionListener="#{dashboardMB.zarzadzanieKontamiRedirect()}" /></li>
+                                         actionListener="#{bookBean.saveBook}" /></li>
                     <li><p:commandButton value="Edycja majatku"
                                          actionListener="#{dashboardMB.edycjaRedirect()}" /></li>
                     <li><p:commandButton value="Zgłoszenia"
@@ -54,47 +54,46 @@
         </div>
 
         <div id="container">
+            <h:form id="userform">                
+                <p:tabView var="var" value="Test" id="currents">
+                    <p:tab title="Zgłoś">
+                        <table>
+                            <tr>
+                                <td><p>Id:</p></td>
+                                <td><p:inputText required="true" value="#{manageAssetNotesMB.targetAssetID}" /></td>
+                            </tr>
+                            <tr>
+                                <td><p>Problem:</p></td>
+                                <td><p:inputText required="true" value="#{manageAssetNotesMB.assetNote.reason}" /></td>
+                            </tr>
+                            <tr>
+                                <td><p>Uszkodzony?</p></td>
+                                <td><p><p:selectBooleanCheckbox value="#{manageAssetNotesMB.assetNote.isDamaged}" /></p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Zagubiony?</p></td>
+                                <td><p><p:selectBooleanCheckbox value="#{manageAssetNotesMB.assetNote.isLost}" /></p></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="x">
+                                        <p:growl id="messages"></p:growl>
+                                        <p:commandButton value="Zgłoś" update="messages currents" action="#{manageAssetNotesMB.reportNote()}" />
+                                    </p>
+                                </td>
+                            </tr>
 
-            <h:form id="form">
-                <p:growl id="messages"></p:growl>
-                <p:panelGrid columns="2">
-                    <p:outputLabel value="Zgłaszający" />
-                    <h:inputText value="#{manageAssetNoteMB.assetNote.users.name} #{manageAssetNoteMB.assetNote.users.surname}" readonly="true"/>
-                    <p:outputLabel value="Powód" />
-                    <h:inputText value="#{manageAssetNoteMB.assetNote.reason}" readonly="true"/>
-                    <p:outputLabel value="Czy zagubiony (wg noty)" />
-                    <h:outputText value="#{manageAssetNoteMB.assetNote.isLost}" />
-                    <p:outputLabel value="Czy uszkodzony (wg noty)" />
-                    <h:outputText value="#{manageAssetNoteMB.assetNote.isDamaged}" />
-                    <p:outputLabel value="ID śodka" />
-                    <h:inputText value="#{manageAssetNoteMB.assetNote.assets.id}" readonly="true"/>
-                    <p:outputLabel value="Opis środka"></p:outputLabel>
-                    <p:inputText value="#{manageAssetNoteMB.assetNote.assets.description}"></p:inputText>  
-                    <p:outputLabel value="Inf. dodatkowe"></p:outputLabel>
-                    <p:inputText value="#{manageAssetNoteMB.assetNote.assets.extraInfo}"></p:inputText>  
-                    <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
-                    <p:selectBooleanCheckbox value="#{manageAssetNoteMB.assetNote.assets.isLendable}" />
-                    <p:outputLabel value="Środek materialny?"></p:outputLabel>
-                    <p:selectBooleanCheckbox value="#{manageAssetNoteMB.assetNote.assets.isMaterial}" />
-                    <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
-                    <p:selectBooleanCheckbox value="#{manageAssetNoteMB.assetNote.assets.isDamaged}" />
-                    <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
-                    <p:selectBooleanCheckbox value="#{manageAssetNoteMB.assetNote.assets.isLost}" />                
-                </p:panelGrid>                           
-                <p:commandButton value="Obsłuż i zapisz" action="#{manageAssetNoteMB.updateStuff}" update="messages"></p:commandButton>
+                        </table>
+                    </p:tab>
+                </p:tabView>
             </h:form>
-
         </div>
-
-
 
         <div id="footer">
             <div id="footer_text">
                 <p>Copyright &copy; by L4</p>
             </div>
         </div>
-
-
 
     </h:body>
 
