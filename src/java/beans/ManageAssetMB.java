@@ -116,17 +116,46 @@ public class ManageAssetMB {
     public Lends getLend() { return this.lend; }
     
     
+    /**
+     * Return current minimal lendFrom date
+     * @return Date, or null if can lend straight on
+     */
+    private Date getMinLendFromDate() {
+        Date currentDate = null;
+        for (Lends lend : this.getAsset().getLendses()) {
+            if (currentDate == null) {
+                currentDate = lend.getLendTo();               
+            } else
+                if (lend.getLendTo().after(currentDate)) {
+                    currentDate = lend.getLendTo();
+                }
+        }
+        return currentDate;
+    }
+    
     public boolean getCanRent() {
-        if (!this.getAsset().isIsLendable()) return false;
+        return this.getAsset().isIsLendable();
+/*      if (!this.getAsset().isIsLendable()) return false;
         boolean canRent = true;
         Date currentDate = new Date();
         for (Lends lend : this.getAsset().getLendses())
             if (lend.getLendTo().after(currentDate))
                 canRent = false;
-        return canRent;
+        return canRent;     */
     }
     
     public void lendAsset() {
+        // Check if date is valid
+        Date gmldf = this.getMinLendFromDate();
+        if (gmldf != null) {
+            if (!this.lend.getLendFrom().after(gmldf)) {
+                FacesContext.getCurrentInstance().addMessage(null, 
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błąd", "Data wypożyczenia musi być po ostatnim zwrocie"));
+
+                return;
+            }
+        }
+        
         this.lend.setAssets(this.asset);
         this.lend.setId((int)(System.currentTimeMillis() / 10000));      
         this.lend.setUsers(this.loginState.getUser());
