@@ -146,7 +146,7 @@ public class DashboardMB implements Serializable {
                     } catch (IOException e) {
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("zgloszenia.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("zgloszenia_user.xhtml");
                 }
             } catch (IOException e) {
             }
@@ -157,11 +157,23 @@ public class DashboardMB implements Serializable {
             }
         }
     }
-    
-    public void zarzadzanieKontamiRedirect(){
+
+    public void zarzadzanieKontamiRedirect() {
         if (this.loginState.isLoggedIn()) {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("uzytkownicy.xhtml");
+                if (this.loginState.isAdmin()) {
+                    try {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("uzytkownicy.xhtml");
+                    } catch (IOException e) {
+                    }
+                } else {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("denied.xhtml");
+                }
+            } catch (IOException e) {
+            }
+        } else {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             } catch (IOException e) {
             }
         }
