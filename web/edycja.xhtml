@@ -31,7 +31,7 @@
                             Prawa dostępu  : 
                             <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Administrator</c:if>
                             <c:if test="#{dashboardMB.loginState.user.isAdmin == false}">Użytkownik</c:if><br></br>
-                            Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
+                            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel></c:if>
                         </p>
                     </li>
 
@@ -68,21 +68,21 @@
                     </p:column> 
                 </p:dataTable>
             </h:form>
-            <div style="margin-bottom: 20px;">
-                <h:form id="form2">
-                    <p:growl id="messages"></p:growl>
-                    <p:panelGrid columns="2">
-                        <p:outputLabel value="Nazwa nowej sali"></p:outputLabel>
-                        <p:inputText value="#{manageLocationsMB.location.id}" required="true"></p:inputText>  
+            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">
+                <div style="margin-bottom: 20px;">
+                    <h:form id="form2">
+                        <p:growl id="messages"></p:growl>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nazwa nowej sali"></p:outputLabel>
+                            <p:inputText value="#{manageLocationsMB.location.id}" required="true"></p:inputText>  
 
-                    </p:panelGrid>                           
-                    <p:commandButton value="Dodaj salę" action="#{manageLocationsMB.addLocation}" update="messages" ajax="false"></p:commandButton>
-                </h:form>
-            </div>
+                        </p:panelGrid>                           
+                        <p:commandButton value="Dodaj salę" action="#{manageLocationsMB.addLocation}" update="messages" ajax="false"></p:commandButton>
+                    </h:form>
+                </div>
+            </c:if>
+
         </div>
-
-
-
         <div id="footer">
             <div id="footer_text">
                 <p>Copyright &copy; by L4</p>

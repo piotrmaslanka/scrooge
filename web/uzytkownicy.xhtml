@@ -30,7 +30,7 @@
                             Prawa dostępu  : 
                             <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Administrator</c:if>
                             <c:if test="#{dashboardMB.loginState.user.isAdmin == false}">Użytkownik</c:if><br></br>
-                            Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
+                            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel></c:if>
                         </p>
                     </li>
 

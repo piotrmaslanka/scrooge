@@ -31,7 +31,7 @@
                             Prawa dostępu  : 
                             <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Administrator</c:if>
                             <c:if test="#{dashboardMB.loginState.user.isAdmin == false}">Użytkownik</c:if><br></br>
-                            Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
+                            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel></c:if>
                         </p>
                     </li>
 
@@ -79,39 +79,41 @@
                 </h:form>     
             </div>
 
-            <div id="prawy">
-                <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
-                    Dodaj środek:
-                </div>
-                <h:form id="form2">
-                    <p:growl id="messages"></p:growl>
-                    <p:panelGrid columns="2">
-                        <p:outputLabel for="id" value="Nr ewidencyjny"></p:outputLabel>
-                        <p:inputText id="id" value="#{manageAssetsMB.asset.id}" required="true"></p:inputText>  
-                        <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
-                        <p:selectOneMenu value="#{manageAssetsMB.targetUser}">
-                            <f:selectItem itemLabel="(wybierz / nikt)" />
-                            <f:selectItems value="#{manageAssetsMB.userChoices}" />
-                        </p:selectOneMenu>
+            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">
+                <div id="prawy">
+                    <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+                        Dodaj środek:
+                    </div>
+                    <h:form id="form2">
+                        <p:growl id="messages"></p:growl>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel for="id" value="Nr ewidencyjny"></p:outputLabel>
+                            <p:inputText id="id" value="#{manageAssetsMB.asset.id}" required="true"></p:inputText>  
+                            <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
+                            <p:selectOneMenu value="#{manageAssetsMB.targetUser}">
+                                <f:selectItem itemLabel="(wybierz / nikt)" />
+                                <f:selectItems value="#{manageAssetsMB.userChoices}" />
+                            </p:selectOneMenu>
 
-                        <p:outputLabel for="data" value="Data zakupu *"></p:outputLabel>
-                        <p:calendar id="data" value="#{manageAssetsMB.asset.purchaseDate}" required="true" /> 
-                        <p:outputLabel for="opis" value="Opis"></p:outputLabel>
-                        <p:inputText id="opis" value="#{manageAssetsMB.asset.description}" required="true"></p:inputText>  
-                        <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
-                        <p:inputText value="#{manageAssetsMB.asset.extraInfo}"></p:inputText>  
-                        <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
-                        <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLendable}" />
-                        <p:outputLabel value="Środek materialny?"></p:outputLabel>
-                        <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isMaterial}" />
-                        <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
-                        <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isDamaged}" />
-                        <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
-                        <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLost}" />
-                    </p:panelGrid>                           
-                    <p:commandButton value="Dodaj środek" action="#{manageAssetsMB.addAsset()}" update="messages" ajax="false"></p:commandButton>
-                </h:form>  
-            </div>
+                            <p:outputLabel for="data" value="Data zakupu *"></p:outputLabel>
+                            <p:calendar id="data" value="#{manageAssetsMB.asset.purchaseDate}" required="true" /> 
+                            <p:outputLabel for="opis" value="Opis"></p:outputLabel>
+                            <p:inputText id="opis" value="#{manageAssetsMB.asset.description}" required="true"></p:inputText>  
+                            <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
+                            <p:inputText value="#{manageAssetsMB.asset.extraInfo}"></p:inputText>  
+                            <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
+                            <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLendable}" />
+                            <p:outputLabel value="Środek materialny?"></p:outputLabel>
+                            <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isMaterial}" />
+                            <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
+                            <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isDamaged}" />
+                            <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
+                            <p:selectBooleanCheckbox value="#{manageAssetsMB.asset.isLost}" />
+                        </p:panelGrid>                           
+                        <p:commandButton value="Dodaj środek" action="#{manageAssetsMB.addAsset()}" update="messages" ajax="false"></p:commandButton>
+                    </h:form>  
+                </div>
+            </c:if>
         </div>
 
 
