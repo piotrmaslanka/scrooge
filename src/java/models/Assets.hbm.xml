@@ -13,7 +13,7 @@
         <comment>Pe³na nazwa sali (po³o¿enie rodka)</comment>
       </column>
     </many-to-one>
-    <many-to-one class="models.Users" fetch="select" name="users" cascade="all">
+    <many-to-one class="models.Users" fetch="select" name="users" cascade="all" lazy="false">
       <column length="256" name="responsibler">
         <comment>Uzytkownik odpowiedzialny za rodek</comment>
       </column>

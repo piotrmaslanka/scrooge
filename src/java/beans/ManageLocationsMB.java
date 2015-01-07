@@ -21,7 +21,6 @@ import service.LocationService;
 @ManagedBean(name = "manageLocationsMB")
 @RequestScoped
 public class ManageLocationsMB implements Serializable {
-
     @ManagedProperty(value = "#{loginState}")
     private LoginState loginState;
 
@@ -32,9 +31,9 @@ public class ManageLocationsMB implements Serializable {
     public LoginState getLoginState() {
         return this.loginState;
     }
-
-    @ManagedProperty(value = "#{locationServiceImpl}")
-    private LocationService locationService;
+        
+    @ManagedProperty(value="#{locationServiceImpl}")
+    private LocationService locationService;    
 
     @ManagedProperty(value = "#{assetsServiceImpl}")
     private AssetsService assetsService;
