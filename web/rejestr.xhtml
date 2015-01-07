@@ -55,21 +55,18 @@
 
         <div id="container">
             Aktualne wypożyczenia:
-            <p:dataTable var="VAR2" value="#{bean.func}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{bean.func}" />
-                </p:column>
-
-                <p:column headerText="Os. odpowiedzialna">
-                    <h:outputText value="#{bean.func}" />
+            <p:dataTable var="var" value="#{manageLendsMB.allLends}">
+                <p:column headerText="ID">
+                    <h:outputText value="#{var.assets.id}" />
                 </p:column>
 
                 <p:column headerText="Kto wypożyczył?">
-                    <h:outputText value="#{bean.func}" />
+                    <h:outputText value="#{var.users.name}" />
+                    <h:outputText value="#{var.users.surname}" />
                 </p:column>
 
                 <p:column headerText="Zwrot">
-                    <h:outputText value="#{bean.func}" />
+                    <h:outputText value="#{var.lendTo}" />
                 </p:column>
             </p:dataTable> 
         </div>
