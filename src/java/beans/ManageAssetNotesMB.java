@@ -75,9 +75,23 @@ public class ManageAssetNotesMB {
     
     private String targetAssetID = "";
     public void setTargetAssetID(String x) { this.targetAssetID = x; }
-    public String getTargetAssetID() { return this.targetAssetID; }
+    public String getTargetAssetID() { 
+        String assetid = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("asset");
+        if (assetid != null) return assetid;
+        return this.targetAssetID; 
+   }
+    
+    
+    public int getTabIndex() {
+        String assetid = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("asset");
+        if (assetid != null) return 2;
+        return 0;       
+    }
     
     private AssetNotes assetNote = new AssetNotes();
     public void setAssetNote(AssetNotes an) { this.assetNote = an; }
-    public AssetNotes getAssetNote() { return this.assetNote; }
+    public AssetNotes getAssetNote() { 
+
+        return this.assetNote; 
+    }
 }

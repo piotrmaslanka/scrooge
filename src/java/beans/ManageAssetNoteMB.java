@@ -7,8 +7,6 @@ package beans;
 
 import components.LoginState;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,7 +14,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import models.AssetNotes;
-import models.Assets;
 import service.AssetNotesService;
 import service.AssetsService;
 
