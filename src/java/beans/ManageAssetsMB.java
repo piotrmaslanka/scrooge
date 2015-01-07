@@ -209,9 +209,6 @@ public class ManageAssetsMB implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         
         assetsService.updateAsset(assetEdited);
-        
-        assetsForSelecetedLocation = assetsService.getAssetsByLocation(selectedLocation);
-        
     }
     
     public void onRowEditCancel(RowEditEvent event) {
