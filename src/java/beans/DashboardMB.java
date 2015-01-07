@@ -104,7 +104,7 @@ public class DashboardMB implements Serializable {
                     } catch (IOException e) {
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("denied.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("edycja.xhtml");
                 }
             } catch (IOException e) {
             }

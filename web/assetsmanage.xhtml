@@ -29,7 +29,7 @@
                             Prawa dostępu  : 
                             <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Administrator</c:if>
                             <c:if test="#{dashboardMB.loginState.user.isAdmin == false}">Użytkownik</c:if><br></br>
-                            Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel>
+                            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">Oczekujące noty: <p:outputLabel value="#{dashboardMB.outstandingAssetNotesAmount}"></p:outputLabel></c:if>
                         </p>
                     </li>
 
@@ -54,46 +54,54 @@
         <div id="container">
             <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
                 Id przedmiotu: <h:outputText value="#{manageAssetMB.asset.id}" /><br></br>
-                <p:commandButton value="Powrót" actionListener="#{dashboardMB.edycjaRedirect()}" />
+                <p:commandButton value="Powrót" actionListener="#{dashboardMB.edycjaRedirect()}" /><br></br>
+                <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">
+                    <p:button href="zgloszenia.xhtml?asset=#{manageAssetMB.asset.id}" value="Zgłoś notę" /><br></br>
+                </c:if>
+                <c:if test="#{dashboardMB.loginState.user.isAdmin == false}">
+                    <p:button href="zgloszenia_user.xhtml?asset=#{manageAssetMB.asset.id}" value="Zgłoś notę" /><br></br>
+                </c:if>
             </div>
-            <div id="lewy">
-                <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
-                    Edycja
-                </div>
-                <h:form id="form2">
-                    <p:growl id="messages"></p:growl>
-                    <p:panelGrid columns="2">
-                        <p:outputLabel for="id" value="Nr ewidencyjny"></p:outputLabel>
-                        <p:inputText id="id" required="true" value="#{manageAssetMB.asset.id}"></p:inputText>  
-                        <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
-                        <p:selectOneMenu value="#{manageAssetMB.targetUser}">
-                            <f:selectItem itemLabel="Wybierz użytkownika" />
-                            <f:selectItems value="#{manageAssetMB.userChoices}" />
-                        </p:selectOneMenu>
-                        <p:outputLabel for="loc" value="Lokalizacja"></p:outputLabel>
-                        <p:selectOneMenu id="loc" required="true" value="#{manageAssetMB.targetLocation}">
-                            <f:selectItem itemLabel="Wybierz lokalizację" />
-                            <f:selectItems value="#{manageAssetMB.locationChoices}" />
-                        </p:selectOneMenu>                
+            <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">
+                <div id="lewy">
+                    <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+                        Edycja
+                    </div>
+                    <h:form id="form2">
+                        <p:growl id="messages"></p:growl>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel for="id" value="Nr ewidencyjny"></p:outputLabel>
+                            <p:inputText id="id" required="true" value="#{manageAssetMB.asset.id}"></p:inputText>  
+                            <p:outputLabel value="Użytkownik odpowiedzialny"></p:outputLabel>
+                            <p:selectOneMenu value="#{manageAssetMB.targetUser}">
+                                <f:selectItem itemLabel="Wybierz użytkownika" />
+                                <f:selectItems value="#{manageAssetMB.userChoices}" />
+                            </p:selectOneMenu>
+                            <p:outputLabel for="loc" value="Lokalizacja"></p:outputLabel>
+                            <p:selectOneMenu id="loc" required="true" value="#{manageAssetMB.targetLocation}">
+                                <f:selectItem itemLabel="Wybierz lokalizację" />
+                                <f:selectItems value="#{manageAssetMB.locationChoices}" />
+                            </p:selectOneMenu>                
 
-                        <p:outputLabel for="date" value="Data zakupu"></p:outputLabel>
-                        <p:calendar id="date" required="true" value="#{manageAssetMB.asset.purchaseDate}" /> 
-                        <p:outputLabel for="opis" value="Opis"></p:outputLabel>
-                        <p:inputText id="opis" required="true" value="#{manageAssetMB.asset.description}"></p:inputText>  
-                        <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
-                        <p:inputText value="#{manageAssetMB.asset.extraInfo}"></p:inputText>  
-                        <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
-                        <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isLendable}" />
-                        <p:outputLabel value="Środek materialny?"></p:outputLabel>
-                        <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isMaterial}" />
-                        <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
-                        <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isDamaged}" />
-                        <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
-                        <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isLost}" />
-                    </p:panelGrid>                           
-                    <p:commandButton value="Edytuj" action="#{manageAssetMB.updateAsset()}" update="messages" ajax="false"></p:commandButton>
-                </h:form>        
-            </div>
+                            <p:outputLabel for="date" value="Data zakupu"></p:outputLabel>
+                            <p:calendar id="date" required="true" value="#{manageAssetMB.asset.purchaseDate}" /> 
+                            <p:outputLabel for="opis" value="Opis"></p:outputLabel>
+                            <p:inputText id="opis" required="true" value="#{manageAssetMB.asset.description}"></p:inputText>  
+                            <p:outputLabel value="Dodatkowe informacje"></p:outputLabel>
+                            <p:inputText value="#{manageAssetMB.asset.extraInfo}"></p:inputText>  
+                            <p:outputLabel value="Można wypożyczyć?"></p:outputLabel>
+                            <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isLendable}" />
+                            <p:outputLabel value="Środek materialny?"></p:outputLabel>
+                            <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isMaterial}" />
+                            <p:outputLabel value="Czy uszkodzony?"></p:outputLabel>
+                            <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isDamaged}" />
+                            <p:outputLabel value="Czy zagubiony?"></p:outputLabel>
+                            <p:selectBooleanCheckbox value="#{manageAssetMB.asset.isLost}" />
+                        </p:panelGrid>                           
+                        <p:commandButton value="Edytuj" action="#{manageAssetMB.updateAsset()}" update="messages" ajax="false"></p:commandButton>
+                    </h:form>        
+                </div>
+            </c:if>
 
             <div id="prawy">
                 <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
@@ -115,29 +123,28 @@
                     </p:dataTable>
                 </h:form>      
 
-                <div style="margin-bottom: 20px; margin-top: 20px;">
-                    <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
-                        Wypożycz
+                <c:if test="#{dashboardMB.loginState.user.isAdmin == true}">
+                    <div style="margin-bottom: 20px; margin-top: 20px;">
+                        <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+                            Wypożycz
+                        </div>
+                        <h:form id="form3" rendered="#{manageAssetMB.canRent}">
+                            <p:panelGrid columns="2">            
+                                <p:outputLabel value="Od"></p:outputLabel>
+                                <p:calendar value="#{manageAssetMB.lend.lendFrom}" />                             
+                                <p:outputLabel value="Do"></p:outputLabel>
+                                <p:calendar value="#{manageAssetMB.lend.lendTo}" />                             
+                                <p:outputLabel value="Cel"></p:outputLabel>
+                                <p:inputText value="#{manageAssetMB.lend.purpose}"></p:inputText>  
+                                <p:outputLabel value="Dodatkowe dane"></p:outputLabel>
+                                <p:inputText value="#{manageAssetMB.lend.extraInfo}"></p:inputText>  
+                                <p:commandButton value="Wypożycz" action="#{manageAssetMB.lendAsset()}" update="messages" ajax="false"></p:commandButton>
+                            </p:panelGrid>
+                        </h:form>    
                     </div>
-                    <h:form id="form3" rendered="#{manageAssetMB.canRent}">
-                        <p:panelGrid columns="2">            
-                            <p:outputLabel value="Od"></p:outputLabel>
-                            <p:calendar value="#{manageAssetMB.lend.lendFrom}" />                             
-                            <p:outputLabel value="Do"></p:outputLabel>
-                            <p:calendar value="#{manageAssetMB.lend.lendTo}" />                             
-                            <p:outputLabel value="Cel"></p:outputLabel>
-                            <p:inputText value="#{manageAssetMB.lend.purpose}"></p:inputText>  
-                            <p:outputLabel value="Dodatkowe dane"></p:outputLabel>
-                            <p:inputText value="#{manageAssetMB.lend.extraInfo}"></p:inputText>  
-                            <p:commandButton value="Wypożycz" action="#{manageAssetMB.lendAsset()}" update="messages" ajax="false"></p:commandButton>
-                        </p:panelGrid>
-                    </h:form>    
-                </div>
+                </c:if>
 
             </div>
-            
-            <p:button href="zgloszenia.xhtml?asset=#{manageAssetMB.asset.id}" value="Zgłoś notę" />
-
             <div id="footer">
                 <div id="footer_text">
                     <p>Copyright &copy; by L4</p>
