@@ -140,6 +140,5 @@ public class UserMB implements Serializable{
         
         usersService.updateUser(userEdited);
         
-        users = usersService.getAllUsers();
     }
 }
